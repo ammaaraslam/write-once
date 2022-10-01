@@ -1,0 +1,69 @@
+.bytemd {
+  height: calc(100vh - 200px);
+  background-color: #f7f7fc;
+  border-radius: 3px;
+  font-size: 16px;
+  font-family: inherit;
+}
+
+.bytemd-toolbar {
+  padding: 8px;
+  background-color: #e7e7f3;
+  border-radius: 3px 3px 0 0;
+}
+
+.bytemd-toolbar-tab {
+  color: #331cbf;
+}
+
+.bytemd-toolbar-tab.bytemd-toolbar-tab-active {
+  color: #8a8a8a;
+}
+
+.bytemd-toolbar-icon {
+  color: #331cbf;
+}
+
+.bytemd-toolbar-icon.bytemd-tippy.bytemd-tippy-right[bytemd-tippy-path="5"] {
+  display: none;
+}
+
+.bytemd-body {
+  height: calc(100% - 66px);
+  overflow: auto;
+}
+
+.CodeMirror,
+.markdown-body {
+  background-color: #f7f7fc;
+}
+
+.markdown-body .highlight pre,
+.markdown-body pre {
+  background-color: #ffffff;
+}
+
+.bytemd-preview {
+  position: relative;
+}
+
+.bytemd-fullscreen.bytemd {
+  z-index: 10;
+}
+
+.medium-zoom-overlay {
+  z-index: 1;
+}
+
+.medium-zoom-image--opened {
+  z-index: 2;
+}
+
+.markdown-body .task-list-item {
+  list-style-type: none;
+}
+
+.markdown-body .task-list-item input {
+  margin: 0 0.2em 0.25em -1.6em;
+  vertical-align: middle;
+}

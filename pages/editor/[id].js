@@ -1,8 +1,13 @@
 import Layout from "../../components/Layout";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import { IconButton, PrimaryButton } from "../../components/Buttons";
+import MarkdownEditor from "../../components/Editor/MarkdownEditor";
+import MarkdownPreviewer from "../../components/Editor/MarkdownPreviewer";
+import { useState } from "react";
 
 export default function Editor() {
+  const [markdownContent, setMarkdownContent] = useState("");
+  const [showMarkdownPreview, setShowMarkdownPreview] = useState(false);
   return (
     <Layout title="Name of article | WriteOnce" onlyMeta={true}>
       {/* Header */}
@@ -25,7 +30,13 @@ export default function Editor() {
         </div>
       </div>
       {/* Editor */}
-      <div className="w-full h-full flex justify-center items-center"></div>
+      <MarkdownEditor
+        markdownContent={markdownContent}
+        setMarkdownContent={setMarkdownContent}
+      />
+      {showMarkdownPreview && (
+        <MarkdownPreviewer markdownContent={markdownContent} />
+      )}
     </Layout>
   );
 }
