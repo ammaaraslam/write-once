@@ -2,7 +2,7 @@ import Head from "next/head";
 import Footer from "./Footer";
 import Header from "./Header";
 
-const Layout = ({ children, title }) => {
+const Layout = ({ children, title, onlyMeta = false }) => {
   return (
     <div>
       <Head>
@@ -38,9 +38,9 @@ const Layout = ({ children, title }) => {
         />
         <meta name="twitter:site" content="WriteOnce" />
       </Head>
-      <Header />
-      <main className="w-full h-full">{children}</main>
-      <Footer />
+      {!onlyMeta && <Header />}
+      <main className="w-full h-full font-inter">{children}</main>
+      {!onlyMeta && <Footer />}
     </div>
   );
 };
