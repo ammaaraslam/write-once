@@ -4,6 +4,7 @@ import { IconButton, PrimaryButton } from "../../components/Buttons";
 import MarkdownEditor from "../../components/Editor/MarkdownEditor";
 import MarkdownPreviewer from "../../components/Editor/MarkdownPreviewer";
 import { useState } from "react";
+import ThemeToggle from "../../components/ThemeToggle";
 
 export default function Editor() {
   const [markdownContent, setMarkdownContent] = useState("");
@@ -26,6 +27,7 @@ export default function Editor() {
           </div>
         </div>
         <div className="inline-flex justify-center items-center">
+          <ThemeToggle />
           <PrimaryButton small>Publish</PrimaryButton>
         </div>
       </div>

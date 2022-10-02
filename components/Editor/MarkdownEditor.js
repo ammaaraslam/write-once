@@ -64,7 +64,7 @@ const MarkdownEditor = ({ markdownContent, setMarkdownContent }) => {
       </div>
       {/* Editor */}
       <TextareaMarkdown
-        className="w-full h-full focus:outline-none resize-none bg-transparent text-white dark:text-white"
+        className="w-full h-full focus:outline-none resize-none bg-transparent text-black dark:text-white"
         ref={ref}
         value={markdownContent}
         onChange={(e) => {
