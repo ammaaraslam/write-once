@@ -11,9 +11,9 @@ export default function Editor() {
   return (
     <Layout title="Name of article | WriteOnce" onlyMeta={true}>
       {/* Header */}
-      <div className="w-full px-5 py-2 inline-flex justify-between items-center border-b-2">
+      <div className="w-full px-5 py-2 inline-flex justify-between items-center bg-white dark:bg-[#0F0F0F]">
         <div className="inline-flex justify-center items-center">
-          <IconButton>
+          <IconButton darkerBg={false}>
             <HiOutlineArrowLeft />
           </IconButton>
           <div className="flex flex-col justify-center items-start ml-3">
@@ -30,10 +30,13 @@ export default function Editor() {
         </div>
       </div>
       {/* Editor */}
-      <MarkdownEditor
-        markdownContent={markdownContent}
-        setMarkdownContent={setMarkdownContent}
-      />
+      {!showMarkdownPreview && (
+        <MarkdownEditor
+          markdownContent={markdownContent}
+          setMarkdownContent={setMarkdownContent}
+        />
+      )}
+
       {showMarkdownPreview && (
         <MarkdownPreviewer markdownContent={markdownContent} />
       )}

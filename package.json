@@ -10,22 +10,9 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
-    "@bytemd/plugin-breaks": "^1.17.2",
-    "@bytemd/plugin-footnotes": "^1.12.4",
-    "@bytemd/plugin-frontmatter": "^1.17.2",
-    "@bytemd/plugin-gemoji": "^1.17.2",
-    "@bytemd/plugin-gfm": "^1.17.2",
-    "@bytemd/plugin-highlight": "^1.17.2",
-    "@bytemd/plugin-highlight-ssr": "^1.17.2",
-    "@bytemd/plugin-math": "^1.17.2",
-    "@bytemd/plugin-math-ssr": "^1.17.2",
-    "@bytemd/plugin-mermaid": "^1.17.2",
-    "@bytemd/react": "^1.17.2",
-    "@github/markdown-toolbar-element": "^2.1.1",
     "@nhost/nextjs": "^1.7.6",
     "@nhost/react": "^0.13.0",
     "@nhost/react-apollo": "^4.7.6",
-    "@uiw/react-md-editor": "^3.6.0",
     "graphql": "^16.6.0",
     "next": "12.3.1",
     "next-remove-imports": "^1.0.7",
@@ -37,7 +24,8 @@
     "react-syntax-highlighter": "^15.5.0",
     "rehype-raw": "^6.1.1",
     "rehype-sanitize": "^5.0.1",
-    "remark-gfm": "^3.0.1"
+    "remark-gfm": "^3.0.1",
+    "textarea-markdown-editor": "^1.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.12",

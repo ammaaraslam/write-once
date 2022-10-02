@@ -3,3 +3,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bytemd {
+  height: 90vh !important;
+  position: relative;
+}
+
+.bytemd-toolbar {
+  position: absolute;
+  bottom: 25px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 45vw; /* Need a specific value to work */
+  background-color: gray !important;
+  border-radius: 15px;
+  padding-top: 15px !important;
+  padding-bottom: 10px !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  z-index: 100;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bytemd-toolbar-right {
+  display: none;
+}
+.bytemd-toolbar-tab {
+  display: none !important;
+}
+
+@media and screen (max-width: 835px) {
+  .bytemd-toolbar-icon {
+    display: inline-flex !important;
+  }
+  .bytemd-tippy {
+    display: inline-flex !important;
+  }
+}

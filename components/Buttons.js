@@ -13,11 +13,14 @@ export const PrimaryButton = ({ children, handleOnClick, small }) => {
   );
 };
 
-export const IconButton = ({ children, handleOnClick }) => {
+export const IconButton = ({ children, handleOnClick, darkerBg = true }) => {
+  const bgColor = darkerBg
+    ? "hover:bg-[#E0E0E0] dark:hover:bg-[#282828]"
+    : "hover:bg-[#E7E7E7] dark:hover:bg-[#222222]";
   return (
     <button
       type="button"
-      className={`group py-2 px-4 w-fit bg-purple-600  inline-flex justify-center items-center transition-all duration-200 font-extrabold text-white dark:text-black text-center hover:bg-purple-700`}
+      className={`group p-2 rounded-lg w-fit inline-flex justify-center items-center transition-all duration-200 font-extrabold text-black dark:text-white text-center mr-2 last:mr-0 ${bgColor}`}
       onClick={handleOnClick}
     >
       {children}
