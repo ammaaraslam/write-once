@@ -5,43 +5,95 @@ import MarkdownEditor from "../../components/Editor/MarkdownEditor";
 import MarkdownPreviewer from "../../components/Editor/MarkdownPreviewer";
 import { useState } from "react";
 import ThemeToggle from "../../components/ThemeToggle";
+import {
+  AiOutlineBold,
+  AiOutlineItalic,
+  AiOutlineStrikethrough,
+  AiOutlineLink,
+  AiOutlineUnorderedList,
+  AiOutlineOrderedList,
+  AiFillEye,
+  AiOutlineQuestion,
+  AiFillSetting,
+} from "react-icons/ai";
+import MarkdownGuide from "../../components/Editor/MarkdownGuide";
+import { TOC } from "../../components/Editor/TOC";
+import PublishModal from "../../components/Editor/PublishModal";
 
 export default function Editor() {
   const [markdownContent, setMarkdownContent] = useState("");
   const [showMarkdownPreview, setShowMarkdownPreview] = useState(false);
+  const [showMarkdownGuide, setShowMarkdownGuide] = useState(false);
+  const [showTOC, setShowTOC] = useState(false);
+  const [showPublishModal, setShowPublishModal] = useState(false);
+
+  const [title, setTitle] = useState("Untitled");
+
+  const [hashnode, setHashnode] = useState(false);
+  const [dev, setDev] = useState(false);
+  const [medium, setMedium] = useState(false);
+
   return (
-    <Layout title="Name of article | WriteOnce" onlyMeta={true}>
+    <Layout title={`${title} | WriteOnce`} onlyMeta={true}>
       {/* Header */}
-      <div className="w-full px-5 py-2 inline-flex justify-between items-center bg-white dark:bg-[#0F0F0F]">
+      <div className="w-full px-4 py-3 inline-flex justify-between items-center bg-white dark:bg-[#0F0F0F] transition-all duration-200 ease-in-out z-10">
         <div className="inline-flex justify-center items-center">
           <IconButton darkerBg={false}>
             <HiOutlineArrowLeft />
           </IconButton>
-          <div className="flex flex-col justify-center items-start ml-3">
-            <h2 className="font-semibold text-gray-800 text-lg">
-              Title of the article/blog
-            </h2>
-            <span className="font-light text-gray-400 text-sm">
-              created date of article/blog
+          <div className="flex flex-col justify-center items-start ml-1 w-fit">
+            <input
+              onChange={(e) => setTitle(e.target.value)}
+              className="focus:outline-none bg-transparent border-b border-b-white dark:border-b-[#0F0F0F] focus:border-b-[#E0E0E0] dark:focus:border-b-[#282828] p-0 w-fit transition-colors duration-200 leading-3 text-black dark:text-white"
+              type="text"
+              value={title}
+              required
+            />
+            <span className="text-black dark:text-white text-sm mt-1 text-opacity-60 dark:text-opacity-60">
+              Last Updated &#x2022; 21-09-2022
             </span>
           </div>
         </div>
         <div className="inline-flex justify-center items-center">
           <ThemeToggle />
-          <PrimaryButton small>Publish</PrimaryButton>
+          <PrimaryButton small handleOnClick={() => setShowPublishModal(true)}>
+            Publish
+          </PrimaryButton>
         </div>
       </div>
       {/* Editor */}
-      {!showMarkdownPreview && (
+      <div className="inline-flex justify-center items-center w-full z-10">
         <MarkdownEditor
           markdownContent={markdownContent}
           setMarkdownContent={setMarkdownContent}
+          showMarkdownPreview={showMarkdownPreview}
+          setShowMarkdownPreview={setShowMarkdownPreview}
+          showMarkdownGuide={showMarkdownGuide}
+          setShowMarkdownGuide={setShowMarkdownGuide}
+          showTOC={showTOC}
+          setShowTOC={setShowTOC}
         />
-      )}
 
-      {showMarkdownPreview && (
-        <MarkdownPreviewer markdownContent={markdownContent} />
-      )}
+        {showMarkdownPreview && (
+          <MarkdownPreviewer markdownContent={markdownContent} />
+        )}
+        {showMarkdownGuide && (
+          <MarkdownGuide setShowMarkdownGuide={setShowMarkdownGuide} />
+        )}
+        {showTOC && (
+          <TOC markdownContent={markdownContent} setShowTOC={setShowTOC} />
+        )}
+      </div>
+      <PublishModal
+        opened={showPublishModal}
+        onClose={() => setShowPublishModal(false)}
+        hashnode={hashnode}
+        dev={dev}
+        medium={medium}
+        setHashnode={setHashnode}
+        setDev={setDev}
+        setMedium={setMedium}
+      />
     </Layout>
   );
 }

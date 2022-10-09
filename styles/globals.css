@@ -4,43 +4,74 @@
 @tailwind components;
 @tailwind utilities;
 
-.bytemd {
-  height: 90vh !important;
-  position: relative;
+.markdown-content {
+  @apply text-black
+    dark:text-white;
 }
 
-.bytemd-toolbar {
-  position: absolute;
-  bottom: 25px;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  width: 45vw; /* Need a specific value to work */
-  background-color: gray !important;
-  border-radius: 15px;
-  padding-top: 15px !important;
-  padding-bottom: 10px !important;
-  padding-left: 20px !important;
-  padding-right: 20px !important;
-  z-index: 100;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  @apply py-3 leading-normal font-extrabold;
 }
 
-.bytemd-toolbar-right {
-  display: none;
+.markdown-content h1 {
+  @apply text-5xl;
 }
-.bytemd-toolbar-tab {
-  display: none !important;
+.markdown-content h2 {
+  @apply text-4xl;
+}
+.markdown-content h3 {
+  @apply text-3xl;
+}
+.markdown-content h4 {
+  @apply text-2xl;
+}
+.markdown-content h5 {
+  @apply text-xl;
+}
+.markdown-content h6 {
+  @apply text-lg;
 }
 
-@media and screen (max-width: 835px) {
-  .bytemd-toolbar-icon {
-    display: inline-flex !important;
-  }
-  .bytemd-tippy {
-    display: inline-flex !important;
-  }
+.markdown-content ul,
+ol {
+  @apply py-2;
+}
+
+.markdown-content ul li {
+  @apply py-1 ml-16 list-disc;
+}
+.markdown-content ul li li {
+  @apply py-1 ml-16 list-[circle];
+}
+
+.markdown-content ol li {
+  @apply py-1 ml-16 list-decimal;
+}
+.markdown-content ol li li {
+  @apply py-1 ml-16 list-[roman];
+}
+
+.markdown-content blockquote {
+  @apply border-l-4 border-l-[#E0E0E0] dark:border-l-[#282828] italic py-2 px-3;
+}
+
+.markdown-content a {
+  @apply text-blue-500 underline hover:text-blue-600;
+}
+
+.markdown-content code {
+  @apply p-1 rounded-md bg-[#E0E0E0] dark:bg-[#282828];
+}
+
+.markdown-content pre div code {
+  @apply bg-transparent;
+}
+
+.toc-ul li {
+  @apply font-medium text-lg underline decoration-blue-500 hover:text-blue-500;
 }
