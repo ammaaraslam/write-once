@@ -21,25 +21,42 @@ export const IconButton = ({
   handleOnClick,
   darkerBg = true,
   left = false,
+  center = false,
   tooltipText,
   topTooltip = true,
   bottomTooltip = false,
+  rightToolTip = false,
   ref,
+  sizeBig = false,
+  colored = false,
+  active,
 }) => {
-  const bgColor = darkerBg
+  const bgColor = colored
+    ? "bg-blue-500 hover:bg-blue-600"
+    : active
+    ? "bg-[#E0E0E0] dark:bg-[#282828]"
+    : darkerBg
     ? "hover:bg-[#E0E0E0] dark:hover:bg-[#282828]"
     : "hover:bg-[#E7E7E7] dark:hover:bg-[#222222]";
-  const margin = left ? "ml-2" : "mr-2 ";
-  const tooltipPosition =
-    (topTooltip && "-top-11") || (bottomTooltip && "-bottom-11");
-  const caretPosition =
-    (topTooltip && "-bottom-3") || (bottomTooltip && "-top-3 rotate-180");
+  const margin = left ? "ml-2" : center ? "mx-auto" : "mr-2";
+  const tooltipPosition = topTooltip
+    ? "-top-11"
+    : rightToolTip
+    ? "-right-24"
+    : "bottom-0";
+  const caretPosition = topTooltip
+    ? "-bottom-3 left-0 right-0 mx-auto"
+    : rightToolTip
+    ? "-left-3 top-0 bottom-0 my-auto rotate-90"
+    : "";
+
+  const size = sizeBig ? "p-2 text-2xl" : "p-2 text-lg";
 
   return (
     <button
       ref={ref}
       type="button"
-      className={`group p-2 rounded-lg w-fit h-fit inline-flex justify-center items-center transition-all duration-200 text-black dark:text-white text-center ${margin} ${bgColor}`}
+      className={`group ${size} rounded-lg w-fit h-fit inline-flex justify-center items-center transition-all duration-200 text-black dark:text-white text-center ${margin} ${bgColor}`}
       onClick={handleOnClick}
     >
       {children}
@@ -49,7 +66,7 @@ export const IconButton = ({
         >
           {tooltipText}
           <AiFillCaretDown
-            className={`absolute ${caretPosition} text-[#E0E0E0] dark:text-[#282828] text-lg left-0 right-0 mx-auto`}
+            className={`absolute ${caretPosition} text-[#E0E0E0] dark:text-[#282828] text-lg `}
           />
         </span>
       )}

@@ -10,5 +10,5 @@ module.exports = {
       inter: ["Inter", "sans-serif"],
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp")],
 };
