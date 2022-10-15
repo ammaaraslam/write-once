@@ -4,8 +4,9 @@ import ArticleCard from "../components/Dashboard/ArticleCard";
 import Header from "../components/Dashboard/Header";
 import Sidebar from "../components/Dashboard/Sidebar";
 import Layout from "../components/Layout";
+import ProtectedRoute from "../components/ProtectedRoute";
 
-export default function Dashboard() {
+function Dashboard() {
   const currentRoute = useRouter().asPath;
   const currentPage = currentRoute.includes("drafts")
     ? "Drafts"
@@ -28,3 +29,5 @@ export default function Dashboard() {
     </Layout>
   );
 }
+
+export default ProtectedRoute(Dashboard);
