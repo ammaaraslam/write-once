@@ -3,7 +3,7 @@ import { HiOutlineArrowLeft } from "react-icons/hi";
 import { IconButton, PrimaryButton } from "../../components/Buttons";
 import MarkdownEditor from "../../components/Editor/MarkdownEditor";
 import MarkdownPreviewer from "../../components/Editor/MarkdownPreviewer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ThemeToggle from "../../components/ThemeToggle";
 import {
   AiOutlineBold,
@@ -19,6 +19,10 @@ import {
 import MarkdownGuide from "../../components/Editor/MarkdownGuide";
 import { TOC } from "../../components/Editor/TOC";
 import PublishModal from "../../components/Editor/PublishModal";
+import CoverImageModal from "../../components/Editor/CoverImageModal";
+import { GET_UNIQUE_ARTICLE } from "../../utils/queries/articles";
+import { useQuery, ApolloClient } from "@apollo/client";
+import { useRouter } from "next/router";
 
 export default function Editor() {
   const [markdownContent, setMarkdownContent] = useState("");
@@ -28,10 +32,26 @@ export default function Editor() {
   const [showPublishModal, setShowPublishModal] = useState(false);
 
   const [title, setTitle] = useState("Untitled");
+  const [coverImage, setCoverImage] = useState(null);
+  const [coverImageData, setCoverImageData] = useState(null);
 
+  const [showCoverImageModal, setShowCoverImageModal] = useState(false);
   const [hashnode, setHashnode] = useState(false);
   const [dev, setDev] = useState(false);
   const [medium, setMedium] = useState(false);
+  const articleId = useRouter().query.id;
+  const { loading, error, data } = useQuery(GET_UNIQUE_ARTICLE, {
+    variables: { id: articleId },
+  });
+  console.log(loading);
+  console.log(error);
+  console.log(data);
+
+  // const [articleData, setArticleData] = useState({
+  //   title: title,
+  //   content: markdownContent,
+  //   coverImage: coverImage,
+  // });
 
   return (
     <Layout title={`${title} | WriteOnce`}>
@@ -54,6 +74,14 @@ export default function Editor() {
             </span>
           </div>
         </div>
+        <button
+          onClick={() => setShowCoverImageModal(true)}
+          className="py-2 px-4 text-center text-[10px] bg-gray-600 hover:bg-gray-700 rounded-lg"
+        >
+          Cover
+          <br />
+          Image
+        </button>
         <div className="inline-flex justify-center items-center">
           <ThemeToggle />
           <PrimaryButton small handleOnClick={() => setShowPublishModal(true)}>
@@ -94,6 +122,25 @@ export default function Editor() {
         setDev={setDev}
         setMedium={setMedium}
       />
+      <CoverImageModal
+        opened={showCoverImageModal}
+        onClose={() => setShowCoverImageModal(false)}
+        coverImage={coverImage}
+        setCoverImage={setCoverImage}
+        coverImageData={coverImageData}
+        setCoverImageData={setCoverImageData}
+        coverImageLink
+      />
     </Layout>
   );
 }
+
+// export async function getServerSideProps(context) {
+//   const article = await GetUniqueArticleSubscription(context.query.id);
+
+//   return {
+//     props: {
+//       article: article,
+//     }, // will be passed to the page component as props
+//   };
+// }

@@ -214,9 +214,10 @@ const MarkdownEditor = ({
       </div>
       {/* Editor */}
       <TextareaMarkdown
-        className="w-full h-full focus:outline-none resize-none bg-transparent text-black dark:text-white py-5 px-12"
+        className="w-full h-full focus:outline-none resize-none bg-transparent text-black dark:text-white py-5 px-12 placeholder:italic"
         ref={ref}
         value={markdownContent}
+        placeholder="Begin your amazing story here..."
         onChange={(e) => {
           setMarkdownContent(e.target.value);
         }}
