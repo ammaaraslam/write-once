@@ -8,7 +8,6 @@ import {
 import { BsPencilSquare } from "react-icons/bs";
 import { MdOutlinePublish } from "react-icons/md";
 import { useRouter } from "next/router";
-import { useCreateArticleService } from "../../utils/articles";
 import { useMutation, useSubscription } from "@apollo/client";
 import { useUserData } from "@nhost/react";
 import {

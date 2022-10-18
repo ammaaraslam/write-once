@@ -43,9 +43,12 @@ export default function Editor() {
   const { loading, error, data } = useQuery(GET_UNIQUE_ARTICLE, {
     variables: { id: articleId },
   });
-  console.log(loading);
-  console.log(error);
-  console.log(data);
+  if (!loading) {
+    setTitle(data?.title);
+    setMarkdownContent(data?.content);
+    console.log(data?.title);
+    console.log(data?.content);
+  }
 
   // const [articleData, setArticleData] = useState({
   //   title: title,

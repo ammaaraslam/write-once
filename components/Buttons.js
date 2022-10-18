@@ -78,8 +78,11 @@ export const ToolbarPopupButton = ({
   children,
   handleOnClick,
   darkerBg = true,
+  redHover = false,
 }) => {
-  const bgColor = darkerBg
+  const bgColor = redHover
+    ? "hover:bg-red-600 dark:hover:bg-red-600"
+    : darkerBg
     ? "hover:bg-[#E0E0E0] dark:hover:bg-[#282828]"
     : "hover:bg-[#E7E7E7] dark:hover:bg-[#222222]";
   return (
