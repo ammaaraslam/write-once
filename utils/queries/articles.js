@@ -52,20 +52,17 @@ export const DELETE_UNIQUE_ARTICLE = gql`
   }
 `;
 
-// export const GET_UNIQUE_ARTICLE = gql`
-// subscription GetUniqueArticleSubscription($articleId) {
-//     articles(where: {id: {_eq: $articleId}}) {
-//       title
-//       publishToMedium
-//       publishToHashnode
-//       publishToDev
-//       isPublished
-//       isDraft
-//       createdAt
-//       coverImage
-//       content
-//       updatedAt
-//       userId
-//     }
-//   }
-//   `;
+export const UPDATE_UNIQUE_ARTICLE_CONTENT = gql`
+  mutation UpdateUniqueArticleMutation(
+    $id: uuid!
+    $content: String!
+    $title: String!
+  ) {
+    update_articles_by_pk(
+      pk_columns: { id: $id }
+      _set: { content: $content, coverImage: "", title: $title }
+    ) {
+      id
+    }
+  }
+`;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import SignUpModal from "../components/SignUpModal";
 import { useSignOut, useAuthenticated } from "@nhost/react";

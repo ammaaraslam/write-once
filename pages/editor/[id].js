@@ -20,9 +20,13 @@ import MarkdownGuide from "../../components/Editor/MarkdownGuide";
 import { TOC } from "../../components/Editor/TOC";
 import PublishModal from "../../components/Editor/PublishModal";
 import CoverImageModal from "../../components/Editor/CoverImageModal";
-import { GET_UNIQUE_ARTICLE } from "../../utils/queries/articles";
+import {
+  GET_UNIQUE_ARTICLE,
+  UPDATE_UNIQUE_ARTICLE_CONTENT,
+} from "../../utils/queries/articles";
 import { useQuery, ApolloClient } from "@apollo/client";
 import { useRouter } from "next/router";
+import { useMutation } from "@apollo/client";
 
 export default function Editor() {
   const [markdownContent, setMarkdownContent] = useState("");
@@ -43,18 +47,39 @@ export default function Editor() {
   const { loading, error, data } = useQuery(GET_UNIQUE_ARTICLE, {
     variables: { id: articleId },
   });
-  if (!loading) {
-    setTitle(data?.title);
-    setMarkdownContent(data?.content);
-    console.log(data?.title);
-    console.log(data?.content);
-  }
+  const [updateUniqeArticleContent] = useMutation(
+    UPDATE_UNIQUE_ARTICLE_CONTENT
+  );
 
-  // const [articleData, setArticleData] = useState({
-  //   title: title,
-  //   content: markdownContent,
-  //   coverImage: coverImage,
-  // });
+  useEffect(() => {
+    setTimeout(() => {
+      setTitle(data?.article.title);
+      setMarkdownContent(data?.article.content);
+      setCoverImage(data?.article.coverImage);
+    }, 1500);
+  }, []);
+
+  async function saveContentChanges(e, forItem) {
+    if (forItem === "title") {
+      setTitle(e.target.value);
+      await updateUniqeArticleContent({
+        variables: {
+          id: articleId,
+          title: title,
+          content: markdownContent,
+        },
+      });
+    }
+    if (forItem === "markdownContent") {
+      await updateUniqeArticleContent({
+        variables: {
+          id: articleId,
+          title: title,
+          content: markdownContent,
+        },
+      });
+    }
+  }
 
   return (
     <Layout title={`${title} | WriteOnce`}>
@@ -66,7 +91,9 @@ export default function Editor() {
           </IconButton>
           <div className="flex flex-col justify-center items-start ml-1 w-fit">
             <input
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
               className="focus:outline-none bg-transparent border-b border-b-white dark:border-b-[#0F0F0F] focus:border-b-[#E0E0E0] dark:focus:border-b-[#282828] p-0 w-fit transition-colors duration-200 leading-3 text-black dark:text-white"
               type="text"
               value={title}
@@ -137,13 +164,3 @@ export default function Editor() {
     </Layout>
   );
 }
-
-// export async function getServerSideProps(context) {
-//   const article = await GetUniqueArticleSubscription(context.query.id);
-
-//   return {
-//     props: {
-//       article: article,
-//     }, // will be passed to the page component as props
-//   };
-// }

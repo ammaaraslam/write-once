@@ -15,7 +15,7 @@ import {
   GET_UNIQUE_ARTICLE,
 } from "../../utils/queries/articles";
 
-const Sidebar = () => {
+const Sidebar = ({ showSettingsModal, setShowSettingsModal }) => {
   const router = useRouter();
   const [insertArticle] = useMutation(CREATE_ARTICLE_QUERY);
 
@@ -86,7 +86,11 @@ const Sidebar = () => {
           </div>
         </div>
         <div>
-          <IconButton sizeBig={true} center={true}>
+          <IconButton
+            handleOnClick={() => setShowSettingsModal(true)}
+            sizeBig={true}
+            center={true}
+          >
             <AiOutlineSetting />
           </IconButton>
         </div>

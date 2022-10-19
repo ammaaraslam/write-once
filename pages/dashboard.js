@@ -7,8 +7,11 @@ import Layout from "../components/Layout";
 import ProtectedRoute from "../components/ProtectedRoute";
 import { GET_ALL_ARTICLES } from "../utils/queries/articles";
 import { useQuery } from "@apollo/client";
+import SettingsModal from "../components/Dashboard/SettingsModal";
+import { useState } from "react";
 
 function Dashboard() {
+  const [showSettingsModal, setShowSettingsModal] = useState(false);
   const currentRoute = useRouter().asPath;
   const currentPage = currentRoute.includes("drafts")
     ? "Drafts"
@@ -20,7 +23,10 @@ function Dashboard() {
   return (
     <Layout title={currentPage}>
       <Header />
-      <Sidebar />
+      <Sidebar
+        showSettingsModal={showSettingsModal}
+        setShowSettingsModal={setShowSettingsModal}
+      />
 
       <main className="bg-[#F7F7F7] dark:bg-[#161616] w-full h-full min-h-screen pl-16 pt-16">
         <div className="pl-10 pt-8">
@@ -38,6 +44,10 @@ function Dashboard() {
           ))}
         </div>
       </main>
+      <SettingsModal
+        opened={showSettingsModal}
+        onClose={() => setShowSettingsModal(false)}
+      />
     </Layout>
   );
 }
