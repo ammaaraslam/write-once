@@ -2,7 +2,12 @@ import React from "react";
 import { PrimaryButton, Toggle } from "../Buttons";
 import Modal from "../Modal";
 import { AiOutlineCloudUpload } from "react-icons/ai";
-
+import imageUpload from "../../services/imageUpload";
+import { useFileUpload } from "@nhost/react";
+import nhost from "../../utils/nhost";
+import { useMutation } from "@apollo/client";
+import { UPDATE_UNIQUE_ARTICLE_COVER_IMAGE } from "../../utils/queries/articles";
+import { useRouter } from "next/router";
 const CoverImageModal = ({
   coverImage,
   setCoverImage,
@@ -21,8 +26,21 @@ const CoverImageModal = ({
       setCoverImageData(onLoadEvent.target.result);
     };
   };
-  console.log(coverImage);
-
+  const { id, upload } = useFileUpload();
+  const [updateUniqueArticleCoverImage] = useMutation(
+    UPDATE_UNIQUE_ARTICLE_COVER_IMAGE
+  );
+  const articleId = useRouter().query.id;
+  async function coverImageUpload() {
+    await upload({ file: coverImage, bucketId: "coverImages" });
+    const publicUrl = await nhost.storage.getPublicUrl({ fileId: id });
+    const res = await updateUniqueArticleCoverImage({
+      variables: {
+        id: articleId,
+        coverImageLink: publicUrl,
+      },
+    });
+  }
   return (
     <Modal title="Cover Image" opened={opened} onClose={onClose}>
       <div className="w-full h-full flex flex-col justify-start items-start px-8 font-inter font-bold text-xl z-50">
@@ -92,7 +110,7 @@ const CoverImageModal = ({
           </label>
         )} */}
         <div className="mt-4 w-full flex flex-col justify-center items-center">
-          <PrimaryButton>Upload</PrimaryButton>
+          <PrimaryButton handleOnClick={coverImageUpload}>Upload</PrimaryButton>
         </div>
       </div>
     </Modal>

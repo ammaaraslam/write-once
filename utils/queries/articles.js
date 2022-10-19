@@ -66,3 +66,14 @@ export const UPDATE_UNIQUE_ARTICLE_CONTENT = gql`
     }
   }
 `;
+
+export const UPDATE_UNIQUE_ARTICLE_COVER_IMAGE = gql`
+  mutation MyMutation($id: uuid!, $coverImageLink: String!) {
+    update_articles_by_pk(
+      pk_columns: { id: $id }
+      _set: { coverImage: $coverImageLink }
+    ) {
+      id
+    }
+  }
+`;
