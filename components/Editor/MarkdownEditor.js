@@ -10,6 +10,8 @@ import {
   AiOutlineOrderedList,
   AiOutlineEye,
   AiOutlineSetting,
+  AiOutlineFullscreen,
+  AiOutlineFullscreenExit,
 } from "react-icons/ai";
 import {
   BsBlockquoteLeft,
@@ -39,6 +41,32 @@ const MarkdownEditor = ({
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const menuPopup = showMenu ? "scale-100 opacity-100" : "scale-90 opacity-0";
   const headingPopup = showHeadingMenu ? "scale-100" : "scale-90";
+  const [fullscreen, setFullscreen] = useState(false);
+  function openFullscreen() {
+    const elem = document.getElementById("editor");
+    setFullscreen(true);
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) {
+      /* Safari */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+      /* IE11 */
+      elem.msRequestFullscreen();
+    }
+  }
+  function closeFullscreen() {
+    setFullscreen(false);
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      /* Safari */
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      /* IE11 */
+      document.msExitFullscreen();
+    }
+  }
 
   return (
     <div className="w-full h-[91.8vh] py-4 px-1 relative bg-[#F7F7F7] dark:bg-[#161616]">
@@ -173,6 +201,24 @@ const MarkdownEditor = ({
           >
             <BsReverseLayoutTextWindowReverse />
           </IconButton>
+          {!fullscreen && (
+            <IconButton
+              handleOnClick={openFullscreen}
+              left={true}
+              tooltipText="Fullscreen"
+            >
+              <AiOutlineFullscreen />
+            </IconButton>
+          )}
+          {fullscreen && (
+            <IconButton
+              handleOnClick={closeFullscreen}
+              left={true}
+              tooltipText="Exit Fullscreen"
+            >
+              <AiOutlineFullscreenExit />
+            </IconButton>
+          )}
           <IconButton
             left={true}
             tooltipText="Menu"

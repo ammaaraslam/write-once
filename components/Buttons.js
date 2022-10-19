@@ -22,6 +22,7 @@ export const IconButton = ({
   darkerBg = true,
   left = false,
   center = false,
+  fullCenter = false,
   tooltipText,
   topTooltip = true,
   bottomTooltip = false,
@@ -38,7 +39,13 @@ export const IconButton = ({
     : darkerBg
     ? "hover:bg-[#E0E0E0] dark:hover:bg-[#282828]"
     : "hover:bg-[#E7E7E7] dark:hover:bg-[#222222]";
-  const margin = left ? "ml-2" : center ? "mx-auto" : "mr-2";
+  const margin = left
+    ? "ml-2"
+    : center
+    ? "mx-auto"
+    : fullCenter
+    ? "mx-auto my-auto"
+    : "mr-2";
   const tooltipPosition = topTooltip
     ? "-top-11"
     : rightToolTip
