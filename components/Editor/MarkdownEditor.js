@@ -21,8 +21,9 @@ import {
   BsReverseLayoutTextWindowReverse,
   BsThreeDotsVertical,
   BsMarkdown,
+  BsArrowUpShort,
 } from "react-icons/bs";
-import { CgFormatHeading } from "react-icons/cg";
+import { CgFormatHeading, CgToolbarBottom } from "react-icons/cg";
 import ToolbarPopup from "./ToolbarPopup";
 import SettingsModal from "./SettingsModal";
 
@@ -35,6 +36,8 @@ const MarkdownEditor = ({
   showTOC,
   setShowTOC,
   saveContentChanges,
+  showToolbar,
+  setShowToolbar,
 }) => {
   const ref = useRef();
   const [showMenu, setShowMenu] = useState(false);
@@ -42,6 +45,14 @@ const MarkdownEditor = ({
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const menuPopup = showMenu ? "scale-100 opacity-100" : "scale-90 opacity-0";
   const headingPopup = showHeadingMenu ? "scale-100" : "scale-90";
+  const toolbarDisplay = showToolbar
+    ? "scale-100 z-50 bottom-5"
+    : "scale-90 -z-50 -bottom-5";
+
+  const showToolbarButtonDisplay = !showToolbar
+    ? "scale-100 z-50 -bottom-2"
+    : "scale-90 -z-50 -bottom-10";
+
   const [fullscreen, setFullscreen] = useState(false);
   function openFullscreen() {
     const elem = document.getElementById("editor");
@@ -72,7 +83,15 @@ const MarkdownEditor = ({
   return (
     <div className="w-full h-[91.8vh] py-4 px-1 relative bg-[#F7F7F7] dark:bg-[#161616]">
       {/* Toolbar */}
-      <div className="fixed w-fit bottom-5 left-0 right-0 mx-auto bg-[#EFEFEF] dark:bg-[#1C1C1C] inline-flex justify-center items-center py-2 px-3 rounded-xl text-xl z-50">
+      <button
+        onClick={() => setShowToolbar(true)}
+        className={`fixed w-fit left-0 right-0 mx-auto bg-[#EFEFEF] dark:bg-[#1C1C1C] inline-flex justify-center origin-bottom items-center pt-2 pb-2 px-3 rounded-xl text-xl ${showToolbarButtonDisplay} transition-all duration-200`}
+      >
+        <CgToolbarBottom />
+      </button>
+      <div
+        className={`fixed w-fit left-0 right-0 mx-auto bg-[#EFEFEF] dark:bg-[#1C1C1C] inline-flex justify-center origin-bottom items-center py-2 px-3 rounded-xl text-xl ${toolbarDisplay} transition-all duration-200`}
+      >
         <IconButton
           tooltipText="Bold Text"
           handleOnClick={() => ref.current?.trigger("bold")}
@@ -273,6 +292,8 @@ const MarkdownEditor = ({
       <SettingsModal
         opened={showSettingsModal}
         onClose={() => setShowSettingsModal(false)}
+        showToolbar={showToolbar}
+        setShowToolbar={setShowToolbar}
       />
     </div>
   );

@@ -43,6 +43,8 @@ export default function Editor() {
   const [hashnode, setHashnode] = useState(false);
   const [dev, setDev] = useState(false);
   const [medium, setMedium] = useState(false);
+  const [showToolbar, setShowToolbar] = useState(true);
+
   const articleId = useRouter().query.id;
   const { loading, error, data } = useQuery(GET_UNIQUE_ARTICLE, {
     variables: { id: articleId },
@@ -135,6 +137,8 @@ export default function Editor() {
           showTOC={showTOC}
           setShowTOC={setShowTOC}
           saveContentChanges={saveContentChanges}
+          showToolbar={showToolbar}
+          setShowToolbar={setShowToolbar}
         />
 
         {showMarkdownPreview && (

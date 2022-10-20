@@ -1,8 +1,9 @@
 import React from "react";
+import { Toggle } from "../Buttons";
 import Modal from "../Modal";
 import ThemeToggle from "../ThemeToggle";
 
-const SettingsModal = ({ opened, onClose }) => {
+const SettingsModal = ({ opened, onClose, showToolbar, setShowToolbar }) => {
   return (
     <Modal opened={opened} onClose={onClose}>
       <div className="w-full h-full flex flex-col justify-start items-start py-5 px-8">
@@ -12,7 +13,11 @@ const SettingsModal = ({ opened, onClose }) => {
         </div>
         <div className="w-full inline-flex justify-between items-center my-3 pb-2">
           <span>Hide toolbar</span>
-          <ThemeToggle />
+          <Toggle
+            forItem="hide-toolbar"
+            checked={showToolbar}
+            handleOnChange={() => setShowToolbar(false)}
+          />
         </div>
         <div className="w-full inline-flex justify-between items-center my-3 pb-2">
           <span>Automatically hide toolbar</span>
