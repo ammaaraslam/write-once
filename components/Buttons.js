@@ -33,7 +33,7 @@ export const IconButton = ({
   active,
 }) => {
   const bgColor = colored
-    ? "bg-blue-500 hover:bg-blue-600"
+    ? "bg-[#3b82f6] hover:bg-[#3b82f6]"
     : active
     ? "bg-[#E0E0E0] dark:bg-[#282828]"
     : darkerBg

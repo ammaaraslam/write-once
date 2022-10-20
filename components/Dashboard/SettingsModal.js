@@ -1,25 +1,51 @@
-import React, { useState } from "react";
+import { useMutation, useQuery } from "@apollo/client";
+import { useUserId } from "@nhost/react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineSave } from "react-icons/ai";
+import {
+  CREATE_USER_HASHNODE_TOKEN,
+  GET_TOKENS_WITH_USERID,
+  UPDATE_USER_HASHNODE_TOKEN,
+} from "../../utils/queries/user";
 import { IconButton } from "../Buttons";
 import Modal from "../Modal";
 import ThemeToggle from "../ThemeToggle";
 
 const SettingsModal = ({ opened, onClose }) => {
   const [hashnodeTokenChanged, setHashnodeTokenChanged] = useState(false);
+  const [userHasTokens, setUserHasTokens] = useState(false);
   const [devTokenChanged, setDevTokenChanged] = useState(false);
-  const [hashnodeToken, setHashnodeToken] = useState(null);
+  const [hashnodeToken, setHashnodeToken] = useState("");
   const [devToken, setDevToken] = useState(null);
-  const handleHashnodeInputOnChange = (e) => {
+  const [insertHashnodeToken] = useMutation(CREATE_USER_HASHNODE_TOKEN, {
+    variables: { token: hashnodeToken },
+  });
+  const [updateHashnodeToken] = useMutation(UPDATE_USER_HASHNODE_TOKEN);
+  const userId = useUserId();
+
+  const { loading, error, data } = useQuery(GET_TOKENS_WITH_USERID, {
+    variables: { userId: userId },
+  });
+
+  console.log(loading, error, data);
+  async function handleHashnodeInputOnChange(e) {
     setHashnodeTokenChanged(true);
     setHashnodeToken(e.target.value);
-  };
+  }
 
   const handleDevInputOnChange = (e) => {
     setDevTokenChanged(true);
     setDevToken(e.target.value);
   };
 
-  async function saveHashnodeToken() {}
+  async function saveHashnodeToken() {
+    if (data.length > 0) {
+      const res = await updateHashnodeToken();
+      console.log(res);
+    }
+    const res = await insertHashnodeToken();
+    console.log(res);
+  }
 
   return (
     <Modal opened={opened} onClose={onClose}>
@@ -50,7 +76,12 @@ const SettingsModal = ({ opened, onClose }) => {
             />
             {hashnodeTokenChanged && (
               <div className="ml-2 mt-2">
-                <IconButton colored={true} sizeBig={true} fullCenter={true}>
+                <IconButton
+                  handleOnClick={saveHashnodeToken}
+                  colored={true}
+                  sizeBig={true}
+                  fullCenter={true}
+                >
                   <AiOutlineSave />
                 </IconButton>
               </div>
