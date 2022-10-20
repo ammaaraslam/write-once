@@ -26,6 +26,7 @@ import {
 import { CgFormatHeading, CgToolbarBottom } from "react-icons/cg";
 import ToolbarPopup from "./ToolbarPopup";
 import SettingsModal from "./SettingsModal";
+import { ScrollSync, ScrollSyncPane } from "react-scroll-sync";
 
 const MarkdownEditor = ({
   markdownContent,
@@ -38,6 +39,8 @@ const MarkdownEditor = ({
   saveContentChanges,
   showToolbar,
   setShowToolbar,
+  scrollSync,
+  setScrollSync,
 }) => {
   const ref = useRef();
   const [showMenu, setShowMenu] = useState(false);
@@ -279,21 +282,25 @@ const MarkdownEditor = ({
         </ToolbarPopup>
       </div>
       {/* Editor */}
-      <TextareaMarkdown
-        className="w-full h-full focus:outline-none resize-none bg-transparent text-black dark:text-white py-5 px-12 placeholder:italic"
-        ref={ref}
-        value={markdownContent}
-        placeholder="Begin your amazing story here..."
-        onChange={(e) => {
-          saveContentChanges(e, "markdownContent");
-        }}
-      />
+      <ScrollSyncPane group="one">
+        <TextareaMarkdown
+          className="w-full h-full focus:outline-none resize-none bg-transparent text-black dark:text-white py-5 px-12 placeholder:italic"
+          ref={ref}
+          value={markdownContent}
+          placeholder="Begin your amazing story here..."
+          onChange={(e) => {
+            saveContentChanges(e, "markdownContent");
+          }}
+        />
+      </ScrollSyncPane>
       {/* Extras */}
       <SettingsModal
         opened={showSettingsModal}
         onClose={() => setShowSettingsModal(false)}
         showToolbar={showToolbar}
         setShowToolbar={setShowToolbar}
+        scrollSync={scrollSync}
+        setScrollSync={setScrollSync}
       />
     </div>
   );

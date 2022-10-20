@@ -27,6 +27,7 @@ import {
 import { useQuery, ApolloClient } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
+import { ScrollSync, ScrollSyncPane } from "react-scroll-sync";
 
 export default function Editor() {
   const [markdownContent, setMarkdownContent] = useState("");
@@ -44,6 +45,7 @@ export default function Editor() {
   const [dev, setDev] = useState(false);
   const [medium, setMedium] = useState(false);
   const [showToolbar, setShowToolbar] = useState(true);
+  const [scrollSync, setScrollSync] = useState(true);
 
   const articleId = useRouter().query.id;
   const { loading, error, data } = useQuery(GET_UNIQUE_ARTICLE, {
@@ -126,31 +128,42 @@ export default function Editor() {
         </div>
       </div>
       {/* Editor */}
-      <div className="inline-flex justify-center items-center w-full z-10">
-        <MarkdownEditor
-          markdownContent={markdownContent}
-          setMarkdownContent={setMarkdownContent}
-          showMarkdownPreview={showMarkdownPreview}
-          setShowMarkdownPreview={setShowMarkdownPreview}
-          showMarkdownGuide={showMarkdownGuide}
-          setShowMarkdownGuide={setShowMarkdownGuide}
-          showTOC={showTOC}
-          setShowTOC={setShowTOC}
-          saveContentChanges={saveContentChanges}
-          showToolbar={showToolbar}
-          setShowToolbar={setShowToolbar}
-        />
+      <ScrollSync>
+        <div className="inline-flex justify-center items-center w-full z-10">
+          <MarkdownEditor
+            markdownContent={markdownContent}
+            setMarkdownContent={setMarkdownContent}
+            showMarkdownPreview={showMarkdownPreview}
+            setShowMarkdownPreview={setShowMarkdownPreview}
+            showMarkdownGuide={showMarkdownGuide}
+            setShowMarkdownGuide={setShowMarkdownGuide}
+            showTOC={showTOC}
+            setShowTOC={setShowTOC}
+            saveContentChanges={saveContentChanges}
+            showToolbar={showToolbar}
+            setShowToolbar={setShowToolbar}
+            scrollSync={scrollSync}
+            setScrollSync={setScrollSync}
+          />
 
-        {showMarkdownPreview && (
-          <MarkdownPreviewer markdownContent={markdownContent} />
-        )}
-        {showMarkdownGuide && (
-          <MarkdownGuide setShowMarkdownGuide={setShowMarkdownGuide} />
-        )}
-        {showTOC && (
-          <TOC markdownContent={markdownContent} setShowTOC={setShowTOC} />
-        )}
-      </div>
+          {showMarkdownPreview && (
+            <MarkdownPreviewer
+              scrollSync={scrollSync}
+              markdownContent={markdownContent}
+            />
+          )}
+
+          {/* {showMarkdownGuide && (
+                        <ScrollSyncPane>
+
+            <MarkdownGuide setShowMarkdownGuide={setShowMarkdownGuide} />
+          )}
+          {showTOC && (
+            
+            <TOC markdownContent={markdownContent} setShowTOC={setShowTOC} />
+          )} */}
+        </div>
+      </ScrollSync>
       <PublishModal
         opened={showPublishModal}
         onClose={() => setShowPublishModal(false)}
