@@ -53,24 +53,28 @@ export default function Editor() {
 
   useEffect(() => {
     setTimeout(() => {
-      setTitle(data?.article.title);
-      setMarkdownContent(data?.article.content);
-      setCoverImage(data?.article.coverImage);
-    }, 1500);
+      setTitle(data?.articles[0].title);
+      setMarkdownContent(data?.articles[0].content);
+      setCoverImage(data?.articles[0].coverImage);
+    }, 3000);
   }, []);
-
+  console.log(error);
+  console.log(data?.articles[0]);
   async function saveContentChanges(e, forItem) {
     if (forItem === "title") {
       setTitle(e.target.value);
-      await updateUniqeArticleContent({
-        variables: {
-          id: articleId,
-          title: title,
-          content: markdownContent,
-        },
-      });
+      setTimeout(() => {
+        updateUniqeArticleContent({
+          variables: {
+            id: articleId,
+            title: title,
+            content: markdownContent,
+          },
+        });
+      }, 5000);
     }
     if (forItem === "markdownContent") {
+      setMarkdownContent(e.target.value);
       await updateUniqeArticleContent({
         variables: {
           id: articleId,
@@ -92,7 +96,7 @@ export default function Editor() {
           <div className="flex flex-col justify-center items-start ml-1 w-fit">
             <input
               onChange={(e) => {
-                setTitle(e.target.value);
+                saveContentChanges(e, "title");
               }}
               className="focus:outline-none bg-transparent border-b border-b-white dark:border-b-[#0F0F0F] focus:border-b-[#E0E0E0] dark:focus:border-b-[#282828] p-0 w-fit transition-colors duration-200 leading-3 text-black dark:text-white"
               type="text"
@@ -130,6 +134,7 @@ export default function Editor() {
           setShowMarkdownGuide={setShowMarkdownGuide}
           showTOC={showTOC}
           setShowTOC={setShowTOC}
+          saveContentChanges={saveContentChanges}
         />
 
         {showMarkdownPreview && (

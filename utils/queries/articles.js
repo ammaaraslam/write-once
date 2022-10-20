@@ -9,19 +9,17 @@ export const CREATE_ARTICLE_QUERY = gql`
 `;
 
 export const GET_UNIQUE_ARTICLE = gql`
-  query GetUniqueArticleQuery($id: uuid!) {
-    articles_by_pk(id: $id) {
-      id
-      content
-      coverImage
-      createdAt
-      isDraft
+  query MyQuery($id: uuid!) {
+    articles(where: { id: { _eq: $id } }) {
+      title
       isPublished
+      isDraft
       publishToDev
       publishToHashnode
       publishToMedium
-      title
-      updatedAt
+      content
+      coverImage
+      createdAt
     }
   }
 `;

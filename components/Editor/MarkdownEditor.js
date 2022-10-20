@@ -34,6 +34,7 @@ const MarkdownEditor = ({
   setShowMarkdownGuide,
   showTOC,
   setShowTOC,
+  saveContentChanges,
 }) => {
   const ref = useRef();
   const [showMenu, setShowMenu] = useState(false);
@@ -265,7 +266,7 @@ const MarkdownEditor = ({
         value={markdownContent}
         placeholder="Begin your amazing story here..."
         onChange={(e) => {
-          setMarkdownContent(e.target.value);
+          saveContentChanges(e, "markdownContent");
         }}
       />
       {/* Extras */}
