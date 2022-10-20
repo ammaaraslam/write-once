@@ -1,11 +1,11 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { serializeFetchParameter, useMutation, useQuery } from "@apollo/client";
 import { useUserId } from "@nhost/react";
 import React, { useEffect, useState } from "react";
 import { AiOutlineSave } from "react-icons/ai";
 import {
-  CREATE_USER_HASHNODE_TOKEN,
+  CREATE_USER_TOKENS,
   GET_TOKENS_WITH_USERID,
-  UPDATE_USER_HASHNODE_TOKEN,
+  UPDATE_USER_TOKENS,
 } from "../../utils/queries/user";
 import { IconButton } from "../Buttons";
 import Modal from "../Modal";
@@ -16,18 +16,27 @@ const SettingsModal = ({ opened, onClose }) => {
   const [userHasTokens, setUserHasTokens] = useState(false);
   const [devTokenChanged, setDevTokenChanged] = useState(false);
   const [hashnodeToken, setHashnodeToken] = useState("");
-  const [devToken, setDevToken] = useState(null);
-  const [insertHashnodeToken] = useMutation(CREATE_USER_HASHNODE_TOKEN, {
-    variables: { token: hashnodeToken },
-  });
-  const [updateHashnodeToken] = useMutation(UPDATE_USER_HASHNODE_TOKEN);
+  const [devToken, setDevToken] = useState("");
+  const [insertTokens] = useMutation(CREATE_USER_TOKENS);
+  const [updateTokens] = useMutation(UPDATE_USER_TOKENS);
   const userId = useUserId();
 
   const { loading, error, data } = useQuery(GET_TOKENS_WITH_USERID, {
     variables: { userId: userId },
   });
+  useEffect(() => {
+    setTimeout(() => {
+      setHashnodeToken(
+        data?.user_tokens?.length !== 0
+          ? data?.user_tokens[0]?.hashnodeToken
+          : ""
+      );
+      setDevToken(
+        data?.user_tokens?.length !== 0 ? data?.user_tokens[0]?.devToken : ""
+      );
+    }, 2000);
+  }, []);
 
-  console.log(loading, error, data);
   async function handleHashnodeInputOnChange(e) {
     setHashnodeTokenChanged(true);
     setHashnodeToken(e.target.value);
@@ -37,13 +46,23 @@ const SettingsModal = ({ opened, onClose }) => {
     setDevTokenChanged(true);
     setDevToken(e.target.value);
   };
-
-  async function saveHashnodeToken() {
-    if (data.length > 0) {
-      const res = await updateHashnodeToken();
-      console.log(res);
-    }
-    const res = await insertHashnodeToken();
+  async function createTokens() {
+    const res = await insertTokens({
+      variables: {
+        hashnode: hashnodeToken,
+        dev: devToken,
+      },
+    });
+    console.log(res);
+  }
+  async function saveTokens() {
+    const res = await updateTokens({
+      variables: {
+        id: data.user_tokens[0].id,
+        hashnode: hashnodeToken,
+        dev: devToken,
+      },
+    });
     console.log(res);
   }
 
@@ -68,7 +87,7 @@ const SettingsModal = ({ opened, onClose }) => {
           <span>Hashnode Access Token:</span>
           <div className="w-full inline-flex justify-center items-center">
             <input
-              className="focus:outline-none rounded-lg py-2 px-3 text-sm border-2 border-black dark:border-white border-opacity-20 dark:border-opacity-20 focus:border-opacity-40 dark:focus:border-opacity-40 transition-colors duration-100 mt-2 w-full"
+              className="focus:outline-none rounded-lg py-2 px-3 text-sm border-[1px] border-black dark:border-white border-opacity-20 dark:border-opacity-20 focus:border-opacity-40 dark:focus:border-opacity-40 transition-colors duration-100 mt-2 w-full"
               type="password"
               value={hashnodeToken}
               onChange={handleHashnodeInputOnChange}
@@ -77,7 +96,9 @@ const SettingsModal = ({ opened, onClose }) => {
             {hashnodeTokenChanged && (
               <div className="ml-2 mt-2">
                 <IconButton
-                  handleOnClick={saveHashnodeToken}
+                  handleOnClick={
+                    data?.user_tokens?.length !== 0 ? saveTokens : createTokens
+                  }
                   colored={true}
                   sizeBig={true}
                   fullCenter={true}
@@ -92,7 +113,7 @@ const SettingsModal = ({ opened, onClose }) => {
           <span>Dev.to Access Token:</span>
           <div className="w-full inline-flex justify-center items-center">
             <input
-              className="focus:outline-none rounded-lg py-2 px-3 text-sm border-2 border-black dark:border-white border-opacity-20 dark:border-opacity-20 focus:border-opacity-40 dark:focus:border-opacity-40 transition-colors duration-100 mt-2 w-full"
+              className="focus:outline-none rounded-lg py-2 px-3 text-sm border-[1px] border-black dark:border-white border-opacity-20 dark:border-opacity-20 focus:border-opacity-40 dark:focus:border-opacity-40 transition-colors duration-100 mt-2 w-full"
               type="password"
               value={devToken}
               onChange={handleDevInputOnChange}
@@ -100,7 +121,14 @@ const SettingsModal = ({ opened, onClose }) => {
             />
             {devTokenChanged && (
               <div className="ml-2 mt-2">
-                <IconButton colored={true} sizeBig={true} fullCenter={true}>
+                <IconButton
+                  handleOnClick={
+                    data?.user_tokens?.length !== 0 ? saveTokens : createTokens
+                  }
+                  colored={true}
+                  sizeBig={true}
+                  fullCenter={true}
+                >
                   <AiOutlineSave />
                 </IconButton>
               </div>

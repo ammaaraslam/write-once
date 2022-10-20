@@ -11,27 +11,19 @@ export const GET_TOKENS_WITH_USERID = gql`
   }
 `;
 
-export const CREATE_USER_HASHNODE_TOKEN = gql`
-  mutation CreateUserHashnodeToken($token: String!) {
-    insert_user_tokens(objects: { hashnodeToken: $token, devToken: "" }) {
+export const CREATE_USER_TOKENS = gql`
+  mutation CreateUserHashnodeToken($hashnode: String, $dev: String) {
+    insert_user_tokens(objects: { hashnodeToken: $hashnode, devToken: $dev }) {
       affected_rows
     }
   }
 `;
 
-// export const CREATE_USER_DEV_TOKEN = gql`
-//   mutation CreateUserDevToken($token: String!) {
-//     insert_user_tokens(objects: { devToken: $token, hashnodeNode) {
-//       affected_rows
-//     }
-//   }
-// `;
-
-export const UPDATE_USER_HASHNODE_TOKEN = gql`
-  mutation MyMutation {
+export const UPDATE_USER_TOKENS = gql`
+  mutation MyMutation($id: uuid!, $hashnode: String, $dev: String) {
     update_user_tokens(
-      where: { id: { _eq: "43a3d512-124b-4a1f-a11e-e41f9f822065" } }
-      _set: { hashnodeToken: "abcd" }
+      where: { id: { _eq: $id } }
+      _set: { hashnodeToken: $hashnode, devToken: $dev }
     ) {
       affected_rows
     }
