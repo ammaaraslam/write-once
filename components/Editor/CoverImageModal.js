@@ -1,5 +1,11 @@
 import React from "react";
-import { PrimaryButton, Toggle } from "../Buttons";
+import {
+  OutlinedButton,
+  PrimaryButton,
+  SecondaryButton,
+  SecondaryOutlinedButton,
+  Toggle,
+} from "../Buttons";
 import Modal from "../Modal";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import imageUpload from "../../services/imageUpload";
@@ -109,8 +115,13 @@ const CoverImageModal = ({
             />
           </label>
         )} */}
-        <div className="mt-4 w-full flex flex-col justify-center items-center">
-          <PrimaryButton handleOnClick={coverImageUpload}>Upload</PrimaryButton>
+        <div className="mt-5 py-5 w-full flex flex-col justify-center items-center">
+          <SecondaryOutlinedButton
+            inverse={true}
+            handleOnClick={coverImageUpload}
+          >
+            Upload
+          </SecondaryOutlinedButton>
         </div>
       </div>
     </Modal>

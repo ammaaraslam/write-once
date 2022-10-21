@@ -13,7 +13,7 @@ const MarkdownGuide = ({ setShowMarkdownGuide }) => {
   }, []);
 
   return (
-    <div className="relative w-1/2 h-[90vh] bg-[#F7F7F7] overflow-y-auto">
+    <div className="relative w-1/2 h-[90vh] bg-[#F7F7F7] overflow-hidden">
       <div className="absolute top-2 right-5">
         <IconButton handleOnClick={() => setShowMarkdownGuide(false)}>
           <AiOutlineClose />

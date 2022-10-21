@@ -146,7 +146,7 @@ const SettingsModal = ({ opened, onClose }) => {
           </div>
         </div>
 
-        <div className="w-full flex flex-col justify-between items-start my-3">
+        {/* <div className="w-full flex flex-col justify-between items-start my-3">
           <span>Dev.to Access Token:</span>
           <div className="w-full inline-flex justify-center items-center">
             <input
@@ -171,7 +171,7 @@ const SettingsModal = ({ opened, onClose }) => {
               </div>
             )}
           </div>
-        </div>
+        </div> */}
       </div>
     </Modal>
   );

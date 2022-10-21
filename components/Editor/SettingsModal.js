@@ -1,5 +1,6 @@
-import React from "react";
-import { Toggle } from "../Buttons";
+import React, { useState } from "react";
+import { AiOutlineSave } from "react-icons/ai";
+import { IconButton, Toggle } from "../Buttons";
 import Modal from "../Modal";
 import ThemeToggle from "../ThemeToggle";
 
@@ -10,7 +11,16 @@ const SettingsModal = ({
   setShowToolbar,
   scrollSync,
   setScrollSync,
+  canonicalLink,
+  setCanonicalLink,
 }) => {
+  const [canonicalChanged, setCanonicalChanged] = useState(false);
+
+  function handleCanonicalChange(e) {
+    setCanonicalChanged(true);
+    setCanonicalLink(e.target.value);
+  }
+
   return (
     <Modal opened={opened} onClose={onClose}>
       <div className="w-full h-full flex flex-col justify-start items-start py-5 px-8">
@@ -38,6 +48,32 @@ const SettingsModal = ({
             handleOnChange={() => setScrollSync(!scrollSync)}
           />
         </div>
+        {/* <div className="w-full flex flex-col justify-between items-start my-3">
+          <span>Set Canonical URL:</span>
+          <div className="w-full inline-flex justify-center items-center">
+            <input
+              className="focus:outline-none rounded-lg py-2 px-3 text-sm border-[1px] border-black dark:border-white border-opacity-20 dark:border-opacity-20 focus:border-opacity-40 dark:focus:border-opacity-40 transition-colors duration-100 mt-2 w-full"
+              type="password"
+              value={canonicalLink}
+              onChange={handleCanonicalChange}
+              required
+            />
+            {canonicalChanged && (
+              <div className="ml-2 mt-2">
+                <IconButton
+                  handleOnClick={
+                    data?.user_tokens?.length !== 0 ? saveTokens : createTokens
+                  }
+                  colored={true}
+                  sizeBig={true}
+                  fullCenter={true}
+                >
+                  <AiOutlineSave />
+                </IconButton>
+              </div>
+            )}
+          </div>
+        </div> */}
         {/* <div className="w-full inline-flex justify-between items-center">
           <span>Enable grammarly</span>
           <button>button</button>
