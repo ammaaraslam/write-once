@@ -20,10 +20,10 @@ export const CREATE_USER_TOKENS = gql`
 `;
 
 export const UPDATE_USER_TOKENS = gql`
-  mutation MyMutation($id: uuid!, $hashnode: String, $dev: String) {
+  mutation MyMutation($id: uuid!, $hashnode: String, $dev: String, $hashnodePublication: String) {
     update_user_tokens(
       where: { id: { _eq: $id } }
-      _set: { hashnodeToken: $hashnode, devToken: $dev }
+      _set: { hashnodeToken: $hashnode, devToken: $dev, hashnodePublicationId: $hashnodePublication }
     ) {
       affected_rows
     }

@@ -39,7 +39,10 @@ const Layout = ({ children, id, title, onlyMeta = true }) => {
         <meta name="twitter:site" content="WriteOnce" />
       </Head>
       {!onlyMeta && <Header />}
-      <main id={id} className="w-full h-full font-inter z-0">
+      <main
+        id={id}
+        className="w-full h-full font-inter z-0 bg-white dark:bg-[#0F0F0F]"
+      >
         {children}
       </main>
       {!onlyMeta && <Footer />}

@@ -17,6 +17,10 @@ const SettingsModal = ({ opened, onClose }) => {
   const [devTokenChanged, setDevTokenChanged] = useState(false);
   const [hashnodeToken, setHashnodeToken] = useState("");
   const [devToken, setDevToken] = useState("");
+  const [hashnodePublicationId, setHashnodePublicationId] = useState("");
+  const [hashnodePublicationIdChanged, setHashnodePublicationIdChanged] =
+    useState(false);
+
   const [insertTokens] = useMutation(CREATE_USER_TOKENS);
   const [updateTokens] = useMutation(UPDATE_USER_TOKENS);
   const userId = useUserId();
@@ -41,6 +45,10 @@ const SettingsModal = ({ opened, onClose }) => {
     setHashnodeTokenChanged(true);
     setHashnodeToken(e.target.value);
   }
+  async function handleHashnodePublicationInputOnChange(e) {
+    setHashnodePublicationIdChanged(true);
+    setHashnodePublicationId(e.target.value);
+  }
 
   const handleDevInputOnChange = (e) => {
     setDevTokenChanged(true);
@@ -51,6 +59,7 @@ const SettingsModal = ({ opened, onClose }) => {
       variables: {
         hashnode: hashnodeToken,
         dev: devToken,
+        hashnodePublication: hashnodePublicationId,
       },
     });
     console.log(res);
@@ -61,6 +70,7 @@ const SettingsModal = ({ opened, onClose }) => {
         id: data.user_tokens[0].id,
         hashnode: hashnodeToken,
         dev: devToken,
+        hashnodePublication: hashnodePublicationId,
       },
     });
     console.log(res);
@@ -109,6 +119,33 @@ const SettingsModal = ({ opened, onClose }) => {
             )}
           </div>
         </div>
+        <div className="w-full flex flex-col justify-between items-start my-3">
+          <span>Hashnode Publication Id:</span>
+          <div className="w-full inline-flex justify-center items-center">
+            <input
+              className="focus:outline-none rounded-lg py-2 px-3 text-sm border-[1px] border-black dark:border-white border-opacity-20 dark:border-opacity-20 focus:border-opacity-40 dark:focus:border-opacity-40 transition-colors duration-100 mt-2 w-full"
+              type="password"
+              value={hashnodePublicationId}
+              onChange={handleHashnodePublicationInputOnChange}
+              required
+            />
+            {hashnodePublicationIdChanged && (
+              <div className="ml-2 mt-2">
+                <IconButton
+                  handleOnClick={
+                    data?.user_tokens?.length !== 0 ? saveTokens : createTokens
+                  }
+                  colored={true}
+                  sizeBig={true}
+                  fullCenter={true}
+                >
+                  <AiOutlineSave />
+                </IconButton>
+              </div>
+            )}
+          </div>
+        </div>
+
         <div className="w-full flex flex-col justify-between items-start my-3">
           <span>Dev.to Access Token:</span>
           <div className="w-full inline-flex justify-center items-center">

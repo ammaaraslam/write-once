@@ -46,7 +46,7 @@ export default function Editor() {
   const [medium, setMedium] = useState(false);
   const [showToolbar, setShowToolbar] = useState(true);
   const [scrollSync, setScrollSync] = useState(true);
-
+  const router = useRouter();
   const articleId = useRouter().query.id;
   const { loading, error, data } = useQuery(GET_UNIQUE_ARTICLE, {
     variables: { id: articleId },
@@ -94,7 +94,10 @@ export default function Editor() {
       {/* Header */}
       <div className="w-full px-4 py-3 inline-flex justify-between items-center bg-white dark:bg-[#0F0F0F] transition-all duration-200 ease-in-out z-10">
         <div className="inline-flex justify-center items-center">
-          <IconButton darkerBg={false}>
+          <IconButton
+            handleOnClick={() => router.push("/dashboard")}
+            darkerBg={false}
+          >
             <HiOutlineArrowLeft />
           </IconButton>
           <div className="flex flex-col justify-center items-start ml-1 w-fit">
@@ -173,6 +176,8 @@ export default function Editor() {
         setHashnode={setHashnode}
         setDev={setDev}
         setMedium={setMedium}
+        title={title}
+        content={markdownContent}
       />
       <CoverImageModal
         opened={showCoverImageModal}

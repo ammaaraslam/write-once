@@ -1,5 +1,6 @@
 import { IoClose } from "react-icons/io5";
 import { IconButton } from "./Buttons";
+import useOutsideClick from "./useOutsideClick";
 
 const Modal = ({ opened, children, onClose, title }) => {
   const modalDisplay = opened
@@ -16,7 +17,7 @@ const Modal = ({ opened, children, onClose, title }) => {
         className={`${modalDisplay} flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 outline-none focus:outline-none`}
       >
         <div
-          className={`${modalDisplay} bg-[#EFEFEF] dark:bg-[#1C1C1C] md:w-1/2 md:h-1/2 p-4 rounded-3xl`}
+          className={`${modalDisplay} bg-[#EFEFEF] dark:bg-[#1C1C1C] md:w-1/2 h-fit 2 p-4 rounded-3xl`}
         >
           {title ? (
             <div className="w-full inline-flex justify-between items-start">

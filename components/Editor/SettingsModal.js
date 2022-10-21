@@ -14,7 +14,11 @@ const SettingsModal = ({
   return (
     <Modal opened={opened} onClose={onClose}>
       <div className="w-full h-full flex flex-col justify-start items-start py-5 px-8">
-        <div className="w-full inline-flex justify-between items-center my-3 pb-2">
+        <h2 className="w-full font-semibold text-2xl text-black dark:text-white border-b-[1px] border-black dark:border-white border-opacity-20 dark:border-opacity-20">
+          Settings
+        </h2>
+
+        <div className="w-full inline-flex justify-between items-center my-3 pt-6 pb-2">
           <span>Toggle Application Theme</span>
           <ThemeToggle />
         </div>
@@ -23,7 +27,7 @@ const SettingsModal = ({
           <Toggle
             forItem="hide-toolbar"
             checked={showToolbar}
-            handleOnChange={() => setShowToolbar(false)}
+            handleOnChange={() => setShowToolbar(!showToolbar)}
           />
         </div>
         <div className="w-full inline-flex justify-between items-center my-3 pb-2 capitalize">
@@ -31,7 +35,7 @@ const SettingsModal = ({
           <Toggle
             forItem="scroll-sync"
             checked={scrollSync}
-            handleOnChange={() => setScrollSync(!setScrollSync)}
+            handleOnChange={() => setScrollSync(!scrollSync)}
           />
         </div>
         {/* <div className="w-full inline-flex justify-between items-center">

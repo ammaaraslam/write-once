@@ -16,6 +16,36 @@ export const PrimaryButton = ({ children, handleOnClick, small }) => {
   );
 };
 
+export const SecondaryButton = ({ children, handleOnClick, small }) => {
+  const buttonSize = small
+    ? "md:py-2 md:px-3 py-2 px-4 md:text-lg text-md rounded-lg"
+    : "md:py-3 md:px-5 py-2 px-4 md:text-xl text-lg rounded-2xl";
+  return (
+    <button
+      type="button"
+      className={`relative group ${buttonSize} w-fit bg-[#e45301] dark:bg-[#e45301] border-2 border-[#e45301] dark:border-[#e45301]  inline-flex justify-center items-center transition-all duration-200 font-semibold text-white dark:text-black text-center  hover:shadow-[-7px_7px_0_#ffffff] dark:hover:shadow-[-7px_7px_0_#0F0F0F] hover:-translate-y-1 hover:translate-x-1`}
+      onClick={handleOnClick}
+    >
+      {children}
+    </button>
+  );
+};
+
+export const OutlinedButton = ({ children, handleOnClick, small }) => {
+  const buttonSize = small
+    ? "md:py-2 md:px-3 py-2 px-4 md:text-lg text-md rounded-lg"
+    : "md:py-3 md:px-5 py-2 px-4 md:text-xl text-lg rounded-2xl";
+  return (
+    <button
+      type="button"
+      className={`relative group font-bold dark:font-bold ${buttonSize} w-fit bg-transparent dark:bg-transparent border-2 border-white dark:border-[#0F0F0F]  inline-flex justify-center items-center transition-all duration-200 font-semibold text-white dark:text-black text-center hover:bg-[#5f5ced] hover:dark:bg-[#5f5ced] hover:shadow-[-7px_7px_0_#ffffff] dark:hover:shadow-[-7px_7px_0_#0F0F0F] ease-out hover:-translate-y-1 hover:translate-x-1`}
+      onClick={handleOnClick}
+    >
+      {children}
+    </button>
+  );
+};
+
 export const IconButton = ({
   children,
   handleOnClick,
