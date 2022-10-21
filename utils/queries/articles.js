@@ -42,6 +42,42 @@ export const GET_ALL_ARTICLES = gql`
   }
 `;
 
+export const GET_ALL_DRAFTS = gql`
+  query GetAllDraftsQuery {
+    articles(where: { isDraft: { _eq: true } }) {
+      id
+      content
+      coverImage
+      createdAt
+      isDraft
+      isPublished
+      publishToDev
+      publishToHashnode
+      publishToMedium
+      title
+      updatedAt
+    }
+  }
+`;
+
+export const GET_ALL_PUBLISHED_ARTICLES = gql`
+  query GetAllPublishedArticles {
+    articles(where: { isPublished: { _eq: true } }) {
+      id
+      content
+      coverImage
+      createdAt
+      isDraft
+      isPublished
+      publishToDev
+      publishToHashnode
+      publishToMedium
+      title
+      updatedAt
+    }
+  }
+`;
+
 export const DELETE_UNIQUE_ARTICLE = gql`
   mutation DeleteUniqueArticleMutation($id: uuid!) {
     delete_articles(where: { id: { _eq: $id } }) {

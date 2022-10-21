@@ -31,7 +31,7 @@ const CodeBlock = {
 const MarkdownPreviewer = ({ scrollSync, markdownContent }) => {
   return (
     <ScrollSyncPane group={scrollSync ? "one" : ""}>
-      <div className="w-full h-[91.8vh] bg-[#F7F7F7] dark:bg-[#161616] border-l-4 py-4 px-1 border-l-white dark:border-l-black overflow-y-auto">
+      <div className="w-full h-[90vh] bg-[#F7F7F7] dark:bg-[#161616] border-l-4 py-5 px-12 border-l-white dark:border-l-black overflow-y-auto">
         <div className="prose prose-lg prose-blue max-w-none">
           <ReactMarkdown
             className="markdown-content"

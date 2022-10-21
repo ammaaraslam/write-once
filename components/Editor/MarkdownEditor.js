@@ -84,7 +84,7 @@ const MarkdownEditor = ({
   }
 
   return (
-    <div className="w-full h-[91.8vh] py-4 px-1 relative bg-[#F7F7F7] dark:bg-[#161616]">
+    <div className="w-full h-[90vh] py-4 px-1 relative bg-[#F7F7F7] dark:bg-[#161616]">
       {/* Toolbar */}
       <button
         onClick={() => setShowToolbar(true)}
@@ -214,7 +214,7 @@ const MarkdownEditor = ({
           >
             <AiOutlineEye />
           </IconButton>
-          <IconButton
+          {/* <IconButton
             left={true}
             tooltipText="Table Of Contents"
             handleOnClick={() => {
@@ -223,7 +223,7 @@ const MarkdownEditor = ({
             }}
           >
             <BsReverseLayoutTextWindowReverse />
-          </IconButton>
+          </IconButton> */}
           {!fullscreen && (
             <IconButton
               handleOnClick={openFullscreen}

@@ -7,7 +7,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      inter: ["Inter", "sans-serif"],
+      inter: ["Roboto", "sans-serif"],
     },
   },
   plugins: [require("@tailwindcss/line-clamp")],

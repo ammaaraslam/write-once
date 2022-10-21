@@ -71,7 +71,7 @@ const ArticleCard = ({ id, title, content, isDraft }) => {
           className="hover:cursor-pointer"
           onClick={() => router.push(`/editor/${id}`)}
         >
-          <h2 className="font-bold text-2xl">{title}</h2>
+          <h2 className="font-bold text-2xl tracking-wide">{title}</h2>
           <div className="mt-4">
             <p className="text-lg line-clamp-4">{content}</p>
           </div>

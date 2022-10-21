@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -15,7 +15,7 @@
 .markdown-content h4,
 .markdown-content h5,
 .markdown-content h6 {
-  @apply py-3 leading-normal font-extrabold;
+  @apply py-3 leading-normal font-extrabold mb-2 border-b-[1px] border-b-[#EFEFEF] dark:border-b-[#282828];
 }
 
 .markdown-content h1 {
@@ -57,11 +57,11 @@ ol {
 }
 
 .markdown-content blockquote {
-  @apply border-l-4 border-l-[#E0E0E0] dark:border-l-[#282828] italic py-2 px-3;
+  @apply mt-8 border-l-4 border-l-[#E0E0E0] dark:border-l-[#282828] italic py-2 px-3;
 }
 
 .markdown-content a {
-  @apply text-blue-500 underline hover:text-blue-600;
+  @apply underline decoration-[#e45301] hover:text-[#e45301] transition-all duration-200;
 }
 
 .markdown-content code {
@@ -72,6 +72,26 @@ ol {
   @apply bg-transparent;
 }
 
+.markdown-content table {
+  @apply w-full mt-8;
+}
+.markdown-content table thead {
+  @apply text-lg bg-[#E0E0E0] dark:bg-[#1C1C1C] border-[1px] border-[#E0E0E0] dark:border-[#1C1C1C];
+}
+.markdown-content table thead tr th {
+  @apply py-3 px-6;
+}
+.markdown-content table tbody tr {
+  @apply bg-[#EFEFEF] dark:bg-[#282828];
+}
+.markdown-content table tbody tr td {
+  @apply py-4 px-6 border-[1px] border-[#E0E0E0] dark:border-[#1C1C1C];
+}
+
 .toc-ul li {
   @apply font-medium text-lg underline decoration-blue-500 hover:text-blue-500;
+}
+
+.home-hero-image {
+  transform: perspective(800px) rotateY(-25deg) rotateX(10deg);
 }

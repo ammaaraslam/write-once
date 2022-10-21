@@ -8,7 +8,22 @@ export const PrimaryButton = ({ children, handleOnClick, small }) => {
   return (
     <button
       type="button"
-      className={`group ${buttonSize} w-fit bg-purple-600  inline-flex justify-center items-center transition-all duration-200 font-extrabold text-white dark:text-black text-center hover:bg-purple-700`}
+      className={`group ${buttonSize} w-fit bg-[#5f5ced]  inline-flex justify-center items-center transition-all duration-200 font-extrabold text-white dark:text-black text-center hover:shadow-[-7px_7px_0_#ffffff] dark:hover:shadow-[-7px_7px_0_#0F0F0F] hover:-translate-y-1 hover:translate-x-1`}
+      onClick={handleOnClick}
+    >
+      {children}
+    </button>
+  );
+};
+
+export const PrimaryOutlineButton = ({ children, handleOnClick, small }) => {
+  const buttonSize = small
+    ? "md:py-2 md:px-3 py-2 px-4 md:text-lg text-md rounded-lg"
+    : "md:py-3 md:px-5 py-2 px-4 md:text-xl text-lg rounded-2xl";
+  return (
+    <button
+      type="button"
+      className={`group ${buttonSize} w-fit bg-white dark:bg-[#0F0F0F] border-2 border-[#5f5ced] dark:border-[#5f5ced]  inline-flex justify-center items-center transition-all duration-200 font-extrabold text-[#5f5ced] dark:text-[#5f5ced] text-center hover:shadow-[-7px_7px_0_#5f5ced] dark:hover:shadow-[-7px_7px_0_#5f5ced] hover:-translate-y-1 hover:translate-x-1`}
       onClick={handleOnClick}
     >
       {children}
@@ -63,7 +78,7 @@ export const IconButton = ({
   active,
 }) => {
   const bgColor = colored
-    ? "bg-[#3b82f6] hover:bg-[#3b82f6]"
+    ? "bg-[#5f5ced] hover:bg-[#5f5ced]"
     : active
     ? "bg-[#E0E0E0] dark:bg-[#282828]"
     : darkerBg

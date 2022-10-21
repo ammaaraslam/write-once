@@ -1,6 +1,10 @@
 import Layout from "../../components/Layout";
 import { HiOutlineArrowLeft } from "react-icons/hi";
-import { IconButton, PrimaryButton } from "../../components/Buttons";
+import {
+  IconButton,
+  PrimaryButton,
+  PrimaryOutlineButton,
+} from "../../components/Buttons";
 import MarkdownEditor from "../../components/Editor/MarkdownEditor";
 import MarkdownPreviewer from "../../components/Editor/MarkdownPreviewer";
 import { useEffect, useState } from "react";
@@ -92,7 +96,7 @@ export default function Editor() {
   return (
     <Layout id="editor" title={`${title} | WriteOnce`}>
       {/* Header */}
-      <div className="w-full px-4 py-3 inline-flex justify-between items-center bg-white dark:bg-[#0F0F0F] transition-all duration-200 ease-in-out z-10">
+      <div className="w-full px-5 py-4 inline-flex justify-between items-center bg-white dark:bg-[#0F0F0F] transition-all duration-200 ease-in-out z-10">
         <div className="inline-flex justify-center items-center">
           <IconButton
             handleOnClick={() => router.push("/dashboard")}
@@ -117,22 +121,22 @@ export default function Editor() {
         </div>
         <button
           onClick={() => setShowCoverImageModal(true)}
-          className="py-2 px-4 text-center text-[10px] bg-gray-600 hover:bg-gray-700 rounded-lg"
+          className="py-3 px-7 text-center text-xs border-2 border-dashed border-[#282828] dark:border-white rounded-lg mr-48"
         >
-          Cover
-          <br />
-          Image
+          Choose Cover Image
         </button>
         <div className="inline-flex justify-center items-center">
-          <ThemeToggle />
-          <PrimaryButton small handleOnClick={() => setShowPublishModal(true)}>
+          <PrimaryOutlineButton
+            small
+            handleOnClick={() => setShowPublishModal(true)}
+          >
             Publish
-          </PrimaryButton>
+          </PrimaryOutlineButton>
         </div>
       </div>
       {/* Editor */}
       <ScrollSync>
-        <div className="inline-flex justify-center items-center w-full z-10">
+        <div className="inline-flex justify-center items-center w-full z-10 overflow-hidden">
           <MarkdownEditor
             markdownContent={markdownContent}
             setMarkdownContent={setMarkdownContent}
@@ -156,15 +160,12 @@ export default function Editor() {
             />
           )}
 
-          {/* {showMarkdownGuide && (
-                        <ScrollSyncPane>
-
+          {showMarkdownGuide && (
             <MarkdownGuide setShowMarkdownGuide={setShowMarkdownGuide} />
           )}
           {showTOC && (
-            
             <TOC markdownContent={markdownContent} setShowTOC={setShowTOC} />
-          )} */}
+          )}
         </div>
       </ScrollSync>
       <PublishModal
