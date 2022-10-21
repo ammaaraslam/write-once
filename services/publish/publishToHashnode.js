@@ -8,7 +8,7 @@ async function publishToHashnode({
 }) {
   let requestBody = {
     query: `mutation CreatePublicationStory {
-            createPublicationStory(publicationId: "62747a028af49c436c4402e9", input: { title: "${title}", contentMarkdown: "${content}", tags: [] }) {
+            createPublicationStory(publicationId: "${publicationId}", input: { title: "${title}", contentMarkdown: "${content}", tags: [] }) {
                 code,
                 success,
                 message
