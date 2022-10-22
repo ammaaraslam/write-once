@@ -17,7 +17,7 @@ import { useAuthenticationStatus } from "@nhost/react";
 
 function Dashboard() {
   const [showSettingsModal, setShowSettingsModal] = useState(false);
-  const router = useRouter().asPath;
+  const router = useRouter();
   const currentRoute = router.asPath;
   const currentPage = currentRoute.includes("drafts")
     ? "Drafts"
