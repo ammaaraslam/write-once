@@ -60,11 +60,9 @@ export default function Editor() {
   );
 
   useEffect(() => {
-    setTimeout(() => {
-      setTitle(data?.articles[0].title);
-      setMarkdownContent(data?.articles[0].content);
-      setCoverImage(data?.articles[0].coverImage);
-    }, 3000);
+    setTitle(data?.articles[0].title);
+    setMarkdownContent(data?.articles[0].content);
+    setCoverImage(data?.articles[0].coverImage);
   }, []);
   console.log(error);
   console.log(data?.articles[0]);
