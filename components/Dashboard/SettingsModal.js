@@ -103,16 +103,26 @@ const SettingsModal = ({ opened, onClose }) => {
             />
             {hashnodeTokenChanged && (
               <div className="ml-2 mt-2">
-                <IconButton
-                  handleOnClick={
-                    data?.user_tokens?.length !== 0 ? saveTokens : createTokens
-                  }
-                  colored={true}
-                  sizeBig={true}
-                  fullCenter={true}
-                >
-                  <AiOutlineSave />
-                </IconButton>
+                {data?.user_tokens?.length !== 0 && (
+                  <IconButton
+                    handleOnClick={createTokens}
+                    colored={true}
+                    sizeBig={true}
+                    fullCenter={true}
+                  >
+                    <AiOutlineSave />
+                  </IconButton>
+                )}
+                {data?.user_tokens?.length === 0 && (
+                  <IconButton
+                    handleOnClick={saveTokens}
+                    colored={true}
+                    sizeBig={true}
+                    fullCenter={true}
+                  >
+                    <AiOutlineSave />
+                  </IconButton>
+                )}
               </div>
             )}
           </div>
@@ -129,16 +139,26 @@ const SettingsModal = ({ opened, onClose }) => {
             />
             {hashnodePublicationIdChanged && (
               <div className="ml-2 mt-2">
-                <IconButton
-                  handleOnClick={
-                    data?.user_tokens?.length !== 0 ? saveTokens : createTokens
-                  }
-                  colored={true}
-                  sizeBig={true}
-                  fullCenter={true}
-                >
-                  <AiOutlineSave />
-                </IconButton>
+                {data?.user_tokens?.length !== 0 && (
+                  <IconButton
+                    handleOnClick={createTokens}
+                    colored={true}
+                    sizeBig={true}
+                    fullCenter={true}
+                  >
+                    <AiOutlineSave />
+                  </IconButton>
+                )}
+                {data?.user_tokens?.length === 0 && (
+                  <IconButton
+                    handleOnClick={saveTokens}
+                    colored={true}
+                    sizeBig={true}
+                    fullCenter={true}
+                  >
+                    <AiOutlineSave />
+                  </IconButton>
+                )}
               </div>
             )}
           </div>
