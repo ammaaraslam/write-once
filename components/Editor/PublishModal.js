@@ -1,10 +1,11 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useUserId } from "@nhost/react";
 import React from "react";
 import publishToHashnode from "../../services/publish/publishToHashnode";
 import { PrimaryButton, SecondaryOutlinedButton, Toggle } from "../Buttons";
 import Modal from "../Modal";
 import { GET_TOKENS_WITH_USERID } from "../../utils/queries/user";
+import { UPDATE_ARTICLE_PUBLISHED_STATUS } from "../../utils/queries/articles";
 
 const PublishModal = ({
   hashnode,
@@ -17,13 +18,16 @@ const PublishModal = ({
   onClose,
   title,
   content,
+  coverImage,
+  articleId,
 }) => {
   const userId = useUserId();
 
   const { loading, error, data } = useQuery(GET_TOKENS_WITH_USERID, {
     variables: { userId: userId },
   });
-  console.log(data);
+
+  const [updatePublishedStatus] = useMutation(UPDATE_ARTICLE_PUBLISHED_STATUS);
 
   async function publishArticle() {
     if (hashnode) {
@@ -32,7 +36,9 @@ const PublishModal = ({
         publicationId: data?.user_tokens[0]?.hashnodePublicationId,
         title: title,
         content: content,
+        coverImage: coverImage,
       });
+      await updatePublishedStatus({ variables: { id: articleId } });
     }
   }
   return (

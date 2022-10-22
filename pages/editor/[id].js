@@ -62,8 +62,6 @@ export default function Editor() {
     UPDATE_UNIQUE_ARTICLE_CONTENT
   );
 
-  console.log(error);
-  console.log(data?.articles[0]);
   async function saveContentChanges(e, forItem) {
     if (forItem === "title") {
       setTitle(e.target.value);
@@ -91,8 +89,6 @@ export default function Editor() {
     setMarkdownContent(data?.articles[0].content);
     setCoverImage(data?.articles[0].coverImage);
   }, [data]);
-
-  console.log(`iamge: ${coverImage}`);
 
   return (
     <Layout id="editor" title={`${title} | WriteOnce`}>
@@ -196,6 +192,8 @@ export default function Editor() {
         setMedium={setMedium}
         title={title}
         content={markdownContent}
+        coverImage={coverImage}
+        articleId={articleId}
       />
       <CoverImageModal
         opened={showCoverImageModal}

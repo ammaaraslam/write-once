@@ -78,6 +78,17 @@ export const GET_ALL_PUBLISHED_ARTICLES = gql`
   }
 `;
 
+export const UPDATE_ARTICLE_PUBLISHED_STATUS = gql`
+  mutation MyMutation($id: uuid!) {
+    update_articles_by_pk(
+      pk_columns: { id: $id }
+      _set: { isPublished: true }
+    ) {
+      id
+    }
+  }
+`;
+
 export const DELETE_UNIQUE_ARTICLE = gql`
   mutation DeleteUniqueArticleMutation($id: uuid!) {
     delete_articles(where: { id: { _eq: $id } }) {
