@@ -37,7 +37,6 @@ function Dashboard() {
   useEffect(() => {
     if (!isAuthenticated) {
       router.push("/");
-      return null;
     }
   }, [isAuthenticated, router]);
 
