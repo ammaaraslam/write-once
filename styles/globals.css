@@ -5,6 +5,20 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+  @apply w-2 bg-transparent dark:bg-transparent cursor-pointer;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply rounded-xl;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-[#E7E7E7] dark:bg-[#222222] cursor-pointer hover:bg-[#E0E0E0] dark:hover:bg-[#282828] rounded-xl;
+}
+
 .markdown-content {
   @apply text-black
     dark:text-white;
