@@ -52,14 +52,14 @@ const PublishModal = ({
             forItem="hashnode"
           />
         </div>
-        <div className="w-full inline-flex justify-between items-center mt-4">
+        {/* <div className="w-full inline-flex justify-between items-center mt-4">
           <span>Publish to Dev.to</span>
           <Toggle
             handleOnChange={() => setDev(!dev)}
             checked={dev}
             forItem="dev"
           />
-        </div>
+        </div> */}
         {/* <div className="w-full inline-flex justify-between items-center mt-4">
           <span>Publish to Medium</span>
           <Toggle
