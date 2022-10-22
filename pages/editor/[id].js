@@ -31,6 +31,7 @@ import {
 import { useQuery, ApolloClient } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
+import { MdOutlineModeEdit } from "react-icons/md";
 import { ScrollSync, ScrollSyncPane } from "react-scroll-sync";
 
 export default function Editor() {
@@ -136,7 +137,17 @@ export default function Editor() {
       </div>
       {/* Editor */}
       <ScrollSync>
-        <div className="inline-flex justify-center items-center w-full z-10 overflow-hidden">
+        <div className="relative inline-flex justify-center items-center w-full z-10 overflow-hidden">
+          <div className="md:hidden inline-flex justify-center items-center rounded-lg absolute top-2 right-2 bg-[#E7E7E7] dark:bg-[#222222]">
+            <IconButton
+              center={true}
+              handleOnClick={() => {
+                setShowMarkdownPreview(false);
+              }}
+            >
+              <MdOutlineModeEdit />
+            </IconButton>
+          </div>
           <MarkdownEditor
             markdownContent={markdownContent}
             setMarkdownContent={setMarkdownContent}
@@ -151,6 +162,8 @@ export default function Editor() {
             setShowToolbar={setShowToolbar}
             scrollSync={scrollSync}
             setScrollSync={setScrollSync}
+            previewer={showMarkdownPreview}
+            guide={showMarkdownGuide}
           />
 
           {showMarkdownPreview && (

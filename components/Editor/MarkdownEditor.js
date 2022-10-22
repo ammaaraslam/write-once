@@ -41,6 +41,8 @@ const MarkdownEditor = ({
   setShowToolbar,
   scrollSync,
   setScrollSync,
+  previewer,
+  guide,
 }) => {
   const ref = useRef();
   const [showMenu, setShowMenu] = useState(false);
@@ -84,7 +86,11 @@ const MarkdownEditor = ({
   }
 
   return (
-    <div className="w-full h-[90vh] py-4 px-1 relative bg-[#F7F7F7] dark:bg-[#161616]">
+    <div
+      className={`w-full ${
+        previewer ? "md:flex hidden" : guide ? "md:flex hidden" : ""
+      } h-[90vh] py-4 px-1 relative bg-[#F7F7F7] dark:bg-[#161616]`}
+    >
       {/* Toolbar */}
       <button
         onClick={() => setShowToolbar(true)}
