@@ -92,6 +92,8 @@ export default function Editor() {
     setCoverImage(data?.articles[0].coverImage);
   }, [data]);
 
+  console.log(`iamge: ${coverImage}`);
+
   return (
     <Layout id="editor" title={`${title} | WriteOnce`}>
       {/* Header */}

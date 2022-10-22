@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  IconButton,
   OutlinedButton,
   PrimaryButton,
   SecondaryButton,
@@ -14,6 +15,7 @@ import nhost from "../../utils/nhost";
 import { useMutation } from "@apollo/client";
 import { UPDATE_UNIQUE_ARTICLE_COVER_IMAGE } from "../../utils/queries/articles";
 import { useRouter } from "next/router";
+import { IoCloseSharp } from "react-icons/io5";
 const CoverImageModal = ({
   coverImage,
   setCoverImage,
@@ -32,24 +34,30 @@ const CoverImageModal = ({
       setCoverImageData(onLoadEvent.target.result);
     };
   };
-  const { id, upload } = useFileUpload();
+  const { upload } = useFileUpload();
   const [updateUniqueArticleCoverImage] = useMutation(
     UPDATE_UNIQUE_ARTICLE_COVER_IMAGE
   );
   const articleId = useRouter().query.id;
   async function coverImageUpload() {
-    await upload({ file: coverImage, bucketId: "coverImages" });
-    const publicUrl = await nhost.storage.getPublicUrl({ fileId: id });
-    const res = await updateUniqueArticleCoverImage({
+    const uploadedImage = await upload({
+      file: coverImage,
+      bucketId: "coverImages",
+    });
+    const publicUrl = nhost.storage.getPublicUrl({ fileId: uploadedImage.id });
+    await updateUniqueArticleCoverImage({
       variables: {
         id: articleId,
         coverImageLink: publicUrl,
       },
     });
+    if (uploadedImage.isUploaded) {
+      onClose();
+    }
   }
   return (
     <Modal title="Cover Image" opened={opened} onClose={onClose}>
-      <div className="w-full h-full flex flex-col justify-start items-start px-8 font-inter font-bold text-xl z-50">
+      <div className="w-full h-full flex flex-col justify-start items-start py-12 px-8 font-inter font-bold text-xl z-50">
         {typeof coverImage !== "string" ? (
           <>
             {coverImageData === null && (
@@ -78,7 +86,12 @@ const CoverImageModal = ({
             )}
             {coverImageData !== null && (
               <>
-                <div className="w-5/6 mt-3 mx-auto h-5/6 inline-flex justify-center items-center">
+                <div className="relative w-5/6 mt-3 mx-auto h-5/6 inline-flex justify-center items-center">
+                  <div className="absolute top-2 right-2">
+                    <IconButton>
+                      <IoCloseSharp />
+                    </IconButton>
+                  </div>
                   <img src={coverImageData} alt="hello" />
                 </div>
               </>
@@ -86,7 +99,18 @@ const CoverImageModal = ({
           </>
         ) : (
           <>
-            <div className="w-5/6 mt-3 mx-auto h-5/6 inline-flex justify-center items-center">
+            <div className="relative w-5/6 mt-3 mx-auto h-5/6 inline-flex justify-center items-center">
+              <div className="absolute top-2 right-2">
+                <IconButton
+                  handleOnClick={() => {
+                    setCoverImage(null);
+                    setCoverImageData(null);
+                  }}
+                >
+                  <IoCloseSharp />
+                </IconButton>
+              </div>
+
               <img src={coverImage} alt="hello" />
             </div>
           </>
@@ -115,14 +139,16 @@ const CoverImageModal = ({
             />
           </label>
         )} */}
-        <div className="mt-5 py-5 w-full flex flex-col justify-center items-center">
-          <SecondaryOutlinedButton
-            inverse={true}
-            handleOnClick={coverImageUpload}
-          >
-            Upload
-          </SecondaryOutlinedButton>
-        </div>
+        {coverImage && coverImageData && (
+          <div className="mt-5 pt-5 w-full flex flex-col justify-center items-center">
+            <SecondaryOutlinedButton
+              inverse={true}
+              handleOnClick={coverImageUpload}
+            >
+              Upload
+            </SecondaryOutlinedButton>
+          </div>
+        )}
       </div>
     </Modal>
   );

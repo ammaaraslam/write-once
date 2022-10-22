@@ -46,13 +46,18 @@ export const SecondaryButton = ({ children, handleOnClick, small }) => {
   );
 };
 
-export const SecondaryOutlinedButton = ({ children, handleOnClick, small }) => {
+export const SecondaryOutlinedButton = ({
+  children,
+  handleOnClick,
+  small,
+  type,
+}) => {
   const buttonSize = small
     ? "md:py-2 md:px-3 py-2 px-4 md:text-lg text-md rounded-lg"
     : "md:py-3 md:px-5 py-2 px-4 md:text-xl text-lg rounded-2xl";
   return (
     <button
-      type="button"
+      type={type ? type : "button"}
       className={`group ${buttonSize} w-fit bg-white dark:bg-[#0F0F0F] border-2 border-[#e45301] dark:border-[#e45301]  inline-flex justify-center items-center transition-all duration-200 font-extrabold text-[#e45301] dark:text-[#e45301] text-center hover:shadow-[-7px_7px_0_#e45301] dark:hover:shadow-[-7px_7px_0_#e45301] hover:-translate-y-1 hover:translate-x-1`}
       onClick={handleOnClick}
     >

@@ -91,7 +91,6 @@ const MarkdownEditor = ({
       document.msExitFullscreen();
     }
   }
-  console.log("hello" + ref.current);
   return (
     <div
       className={`w-full ${mobileEditor} h-[90vh] py-4 px-1 relative bg-[#F7F7F7] dark:bg-[#161616]`}

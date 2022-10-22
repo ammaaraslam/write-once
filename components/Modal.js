@@ -21,7 +21,9 @@ const Modal = ({ opened, children, onClose, title }) => {
         >
           {title ? (
             <div className="w-full inline-flex justify-between items-start">
-              <h2>{title}</h2>
+              <h2 className="font-inter font-semibold pl-3 text-2xl tracking-wider">
+                {title}
+              </h2>
               <IconButton handleOnClick={onClose}>
                 <IoClose />
               </IconButton>
