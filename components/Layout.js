@@ -26,15 +26,15 @@ const Layout = ({ children, id, title, onlyMeta = true }) => {
         <meta property="og:title" content={title} />
         <meta
           property="og:image"
-          content="https://localhost:3000/og-image.png"
+          content="https://writeonce.vercel.app/og-image.png"
         />
         <meta property="og:image:alt" content="" />
-        <meta property="og:url" content="https://localhost:3000" />
+        <meta property="og:url" content="https://writeonce.vercel.app" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content="" />
         <meta
           name="twitter:image"
-          content="https://localhost:3000/og-image.png"
+          content="https://writeonce.vercel.app/og-image.png"
         />
         <meta name="twitter:site" content="WriteOnce" />
       </Head>
