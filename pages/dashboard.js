@@ -13,10 +13,12 @@ import {
 import { useQuery } from "@apollo/client";
 import SettingsModal from "../components/Dashboard/SettingsModal";
 import { useState } from "react";
+import { useAuthenticationStatus } from "@nhost/react";
 
 function Dashboard() {
   const [showSettingsModal, setShowSettingsModal] = useState(false);
-  const currentRoute = useRouter().asPath;
+  const router = useRouter().asPath;
+  const currentRoute = router.asPath;
   const currentPage = currentRoute.includes("drafts")
     ? "Drafts"
     : currentRoute.includes("published")
@@ -30,6 +32,13 @@ function Dashboard() {
       : GET_ALL_ARTICLES
   );
   const userArticles = data?.articles;
+  const { isLoading, isAuthenticated } = useAuthenticationStatus();
+
+  if (!isAuthenticated) {
+    router.push("/");
+    return null;
+  }
+
   return (
     <Layout title={`${currentPage} | WriteOnce`}>
       <Header />
@@ -72,4 +81,4 @@ function Dashboard() {
   );
 }
 
-export default ProtectedRoute(Dashboard);
+export default Dashboard;
