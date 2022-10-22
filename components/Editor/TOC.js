@@ -30,7 +30,6 @@ function getHeadings(source) {
 // Now, the function that renders it all
 export const TOC = ({ markdownContent }) => {
   const headings = getHeadings(markdownContent.toString());
-  console.log(headings);
   return (
     <div className="relative w-1/2 h-[91.8vh] bg-[#F7F7F7] dark:bg-[#161616] border-l-2 py-4 px-1 border-l-black dark:border-l-white border-opacity-30 dark:border-opacity-30 overflow-y-auto">
       <h2 className="font-bold text-2xl underline">Table of content</h2>

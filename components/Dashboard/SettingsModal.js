@@ -62,7 +62,6 @@ const SettingsModal = ({ opened, onClose }) => {
         hashnodePublication: hashnodePublicationId,
       },
     });
-    console.log(res);
   }
   async function saveTokens() {
     const res = await updateTokens({
@@ -73,7 +72,6 @@ const SettingsModal = ({ opened, onClose }) => {
         hashnodePublication: hashnodePublicationId,
       },
     });
-    console.log(res);
   }
 
   return (
