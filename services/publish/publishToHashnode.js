@@ -16,6 +16,7 @@ async function publishToHashnode({
             }
         }`,
   };
+  console.log(publicationId);
   let response = await fetch("https://api.hashnode.com", {
     method: "POST",
     body: JSON.stringify(requestBody),

@@ -52,6 +52,7 @@ const CoverImageModal = ({
       },
     });
     if (uploadedImage.isUploaded) {
+      setCoverImage(publicUrl);
       onClose();
     }
   }

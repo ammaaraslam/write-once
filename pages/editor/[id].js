@@ -61,6 +61,7 @@ export default function Editor() {
   const [updateUniqeArticleContent] = useMutation(
     UPDATE_UNIQUE_ARTICLE_CONTENT
   );
+  console.log(coverImage);
 
   async function saveContentChanges(e, forItem) {
     if (forItem === "title") {
