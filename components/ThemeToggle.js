@@ -1,12 +1,20 @@
 import { useTheme } from "next-themes";
-import { IoSunny } from "react-icons/io5";
-import { IoMoon } from "react-icons/io5";
-import { Toggle } from "./Buttons";
+import { IconButton, Toggle } from "./Buttons";
+import { BsFillLightbulbFill, BsFillLightbulbOffFill } from "react-icons/bs";
 
-function ThemeToggle() {
+function ThemeToggle({ icon = false }) {
   const { systemTheme, theme, setTheme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
   if (currentTheme === "dark") {
+    if (icon) {
+      return (
+        <>
+          <IconButton left={true} handleOnClick={() => setTheme("light")}>
+            <BsFillLightbulbFill className="text-[#e45301]" />
+          </IconButton>
+        </>
+      );
+    }
     return (
       <>
         <Toggle
@@ -16,16 +24,26 @@ function ThemeToggle() {
         />
       </>
     );
+  } else {
+    if (icon) {
+      return (
+        <div>
+          <IconButton left={true} handleOnClick={() => setTheme("dark")}>
+            <BsFillLightbulbOffFill className="text-[#e45301]" />
+          </IconButton>
+        </div>
+      );
+    }
+    return (
+      <>
+        <Toggle
+          handleOnChange={() => setTheme("dark")}
+          forItem="theme-toggle"
+          checked={false}
+        />
+      </>
+    );
   }
-  return (
-    <>
-      <Toggle
-        handleOnChange={() => setTheme("dark")}
-        forItem="theme-toggle"
-        checked={false}
-      />
-    </>
-  );
 }
 
 export default ThemeToggle;

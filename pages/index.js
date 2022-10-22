@@ -13,23 +13,32 @@ import { AiFillStar, AiOutlineStar, AiTwotoneStar } from "react-icons/ai";
 import Image from "next/image";
 import WriteOnceEditorLight from "../public/WriteOnceEditorLight.svg";
 import WriteOnceEditorDark from "../public/WriteOnceEditorDark.svg";
+import { useRouter } from "next/router";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const [signUp, setSignUp] = useState(false);
-  const { signOut } = useSignOut();
-  const isAuthenticated = useAuthenticated();
+  const router = useRouter();
 
+  const isAuthenticated = useAuthenticated();
+  if (isAuthenticated) {
+    router.push("/dashboard");
+    return null;
+  }
   return (
-    <Layout title="WriteOnce" onlyMeta={true}>
-      <div className="w-full h-screen -z-10 overflow-hidden">
+    <Layout
+      title="WriteOnce | A Markdown Editor For Developers Who Blog"
+      onlyMeta={true}
+    >
+      <div className="w-full h-fit -z-10">
         <Header />
-        <div className="w-full h-[85%] flex flex-col justify-center items-start p-8 z-0">
-          <div className="relative w-full h-full inline-flex justify-between items-center py-24 px-8 bg-[#5f5ced] rounded-[2.5rem] z-10">
-            <div className="w-[40%] flex flex-col justify-start items-start z-30">
-              <h1 className="font-inter font-black text-7xl leading-[1.1] tracking-wider uppercase">
+        <div className="w-full h-fit flex flex-col justify-center items-center md:p-8 p-0 z-0">
+          <div className="relative w-full h-full flex flex-col justify-center items-center xl:p-20 lg:p-16 md:p-12 p-6 pt-16 bg-[#5f5ced] md:rounded-[2.5rem] z-10 overflow-clip">
+            <div className="w-full flex flex-col justify-center items-center mt-4 z-30">
+              <h1 className="font-passion font-black xl:text-[7rem] lg:text-[6rem] md:text-[4.8rem] text-[4rem] text-white dark:text-[#0F0F0F] leading-[1.1] tracking-widest uppercase text-center">
                 Not your typical markdown editor
               </h1>
-              <div className="mt-8 inline-flex justify-center items-center">
+              <div className="mt-8 md:inline-flex md:flex-row flex flex-col justify-center items-center">
                 <SecondaryButton handleOnClick={() => setSignUp(true)}>
                   Get Started{" "}
                   <IoRocketSharp
@@ -41,7 +50,7 @@ export default function Home() {
                     size={25}
                   />
                 </SecondaryButton>
-                <div className="ml-3">
+                <div className="md:ml-5 ml-0 md:mt-0 mt-5">
                   <OutlinedButton>
                     <a
                       href="https://github.com/ammaaraslam/write-once"
@@ -63,26 +72,23 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="z-20 absolute right-9 w-[62%] hidden dark:block">
-              <div className="home-hero-image">
-                <Image
-                  src={WriteOnceEditorLight}
-                  alt="WriteOnce Editor - Light"
-                  layout="responsive"
-                />
-              </div>
+            <div className="md:mt-16 mt-10 w-full h-full -z-20 hidden dark:block">
+              <Image
+                src={WriteOnceEditorDark}
+                alt="WriteOnce Editor - Light"
+                layout="responsive"
+              />
             </div>
-            <div className="z-20 absolute right-9 w-[62%] dark:hidden">
-              <div className="home-hero-image">
-                <Image
-                  src={WriteOnceEditorDark}
-                  alt="WriteOnce Editor - Light"
-                  layout="responsive"
-                />
-              </div>
+            <div className="md:mt-16 mt-10 w-full h-full -z-20 dark:hidden">
+              <Image
+                src={WriteOnceEditorLight}
+                alt="WriteOnce Editor - Light"
+                layout="responsive"
+              />
             </div>
           </div>
         </div>
+        <Footer />
       </div>
       <SignUpModal opened={signUp} onClose={() => setSignUp(false)} />
     </Layout>

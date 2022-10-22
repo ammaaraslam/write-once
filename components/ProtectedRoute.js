@@ -6,14 +6,6 @@ export default function ProtectedRoute(Component) {
     const router = useRouter();
     const { isLoading, isAuthenticated } = useAuthenticationStatus();
 
-    if (isLoading) {
-      return (
-        <div>
-          <p>Loading...</p>
-        </div>
-      );
-    }
-
     if (!isAuthenticated) {
       router.push("/");
       return null;

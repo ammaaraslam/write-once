@@ -31,7 +31,7 @@ function Dashboard() {
   );
   const userArticles = data?.articles;
   return (
-    <Layout title={currentPage}>
+    <Layout title={`${currentPage} | WriteOnce`}>
       <Header />
       <Sidebar
         showSettingsModal={showSettingsModal}
@@ -39,12 +39,12 @@ function Dashboard() {
       />
 
       <main className="bg-[#F7F7F7] dark:bg-[#161616] w-full h-full min-h-screen pl-16 pt-16">
-        <div className="pl-10 pt-8">
-          <h1 className="font-inter font-extrabold tracking-wider text-4xl">
+        <div className="md:pl-10 pl-5 pt-8">
+          <h1 className="font-inter font-extrabold tracking-wider md:text-4xl text-2xl">
             {currentPage}
           </h1>
         </div>
-        <div className="w-full h-full flex flex-col justify-center items-center px-12 py-10">
+        <div className="w-full h-full flex flex-col justify-center items-center md:px-12 md:py-10 px-5 py-9">
           {userArticles?.length > 0 ? (
             <>
               {userArticles?.map((article) => (
@@ -58,7 +58,7 @@ function Dashboard() {
               ))}
             </>
           ) : (
-            <p className="font-inter font-semibold text-2xl tracking-wide">
+            <p className="font-inter font-semibold md:text-2xl text-lg text-center tracking-wide">
               You Currently Have No Articles
             </p>
           )}

@@ -11,7 +11,7 @@ const Logo = ({ noText = false, small = false }) => {
         <a className="group relative inline-flex justify-center items-end text-[#e45301] hover:text-[#5f5ced] transition-all duration-150">
           <div
             className={`${
-              small ? "w-10 h-10" : "w-14 h-14"
+              small ? "md:w-10 md:h-10 w-9 h-9" : "md:w-14 md:h-14 w-11 h-11"
             }  opacity-100 group-hover:opacity-0 transition-all duration-300`}
           >
             <Image
@@ -22,7 +22,7 @@ const Logo = ({ noText = false, small = false }) => {
           </div>
           <div
             className={`absolute opacity-0 group-hover:opacity-100 transition-all duration-300 left-0 ${
-              small ? "w-10 h-10" : "w-14 h-14"
+              small ? "md:w-10 md:h-10 w-9 h-9" : "md:w-14 md:h-14 w-11 h-11"
             }`}
           >
             <Image
@@ -32,7 +32,7 @@ const Logo = ({ noText = false, small = false }) => {
             />
           </div>
           {!noText && (
-            <span className="font-lato ml-3 text-3xl font-bold tracking-wider">
+            <span className="font-lato ml-3 md:text-3xl text-xl font-bold tracking-wider">
               WriteOnce
             </span>
           )}

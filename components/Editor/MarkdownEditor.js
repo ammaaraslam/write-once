@@ -93,7 +93,7 @@ const MarkdownEditor = ({
         <CgToolbarBottom />
       </button>
       <div
-        className={`fixed w-fit left-0 right-0 mx-auto bg-[#EFEFEF] dark:bg-[#1C1C1C] inline-flex justify-center origin-bottom items-center py-2 px-3 rounded-xl text-xl ${toolbarDisplay} transition-all duration-200`}
+        className={`fixed w-fit left-0 right-0 mx-auto bg-[#EFEFEF] dark:bg-[#1C1C1C] md:inline-flex md:flex-row flex flex-wrap whitespace-nowrap justify-center origin-bottom items-center py-2 px-3 rounded-xl text-xl ${toolbarDisplay} transition-all duration-200`}
       >
         <IconButton
           tooltipText="Bold Text"

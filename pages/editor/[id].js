@@ -98,12 +98,14 @@ export default function Editor() {
       {/* Header */}
       <div className="w-full px-5 py-4 inline-flex justify-between items-center bg-white dark:bg-[#0F0F0F] transition-all duration-200 ease-in-out z-10">
         <div className="inline-flex justify-center items-center">
-          <IconButton
-            handleOnClick={() => router.push("/dashboard")}
-            darkerBg={false}
-          >
-            <HiOutlineArrowLeft />
-          </IconButton>
+          <div className="md:inline-flex hidden">
+            <IconButton
+              handleOnClick={() => router.push("/dashboard")}
+              darkerBg={false}
+            >
+              <HiOutlineArrowLeft />
+            </IconButton>
+          </div>
           <div className="flex flex-col justify-center items-start ml-1 w-fit">
             <input
               onChange={(e) => {
@@ -121,7 +123,7 @@ export default function Editor() {
         </div>
         <button
           onClick={() => setShowCoverImageModal(true)}
-          className="py-3 px-7 text-center text-xs border-2 border-dashed border-[#282828] dark:border-white rounded-lg mr-48"
+          className="md:block hidden py-3 px-7 text-center text-xs border-2 border-dashed border-[#282828] dark:border-white rounded-lg mr-48"
         >
           Choose Cover Image
         </button>

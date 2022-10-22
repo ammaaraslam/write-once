@@ -14,10 +14,10 @@ const Modal = ({ opened, children, onClose, title }) => {
         className={`${modalBgDisplay} flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 outline-none focus:outline-none backdrop-blur-md`}
       />
       <div
-        className={`${modalDisplay} flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 outline-none focus:outline-none`}
+        className={`${modalDisplay} flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 outline-none focus:outline-none md:p-0 p-3`}
       >
         <div
-          className={`${modalDisplay} bg-[#EFEFEF] dark:bg-[#1C1C1C] md:w-1/2 h-fit 2 p-4 rounded-3xl`}
+          className={`${modalDisplay} bg-[#EFEFEF] dark:bg-[#1C1C1C] md:w-1/2 w-full h-fit 2 p-4 rounded-3xl`}
         >
           {title ? (
             <div className="w-full inline-flex justify-between items-start">
@@ -33,7 +33,7 @@ const Modal = ({ opened, children, onClose, title }) => {
               </IconButton>
             </div>
           )}
-          <div className="flex flex-wrap justify-center ml-auto mr-auto overflow-auto whitespace-nowrap items-center mt-1">
+          <div className="flex flex-col justify-center items-center mt-1">
             {children}
           </div>
         </div>

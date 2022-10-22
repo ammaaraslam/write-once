@@ -8,6 +8,7 @@ module.exports = {
   theme: {
     fontFamily: {
       inter: ["Roboto", "sans-serif"],
+      passion: ["Bebas Neue", "cursive"],
     },
   },
   plugins: [require("@tailwindcss/line-clamp")],
