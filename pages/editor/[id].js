@@ -60,25 +60,18 @@ export default function Editor() {
     UPDATE_UNIQUE_ARTICLE_CONTENT
   );
 
-  useEffect(() => {
-    setTitle(data?.articles[0].title);
-    setMarkdownContent(data?.articles[0].content);
-    setCoverImage(data?.articles[0].coverImage);
-  }, []);
   console.log(error);
   console.log(data?.articles[0]);
   async function saveContentChanges(e, forItem) {
     if (forItem === "title") {
       setTitle(e.target.value);
-      setTimeout(() => {
-        updateUniqeArticleContent({
-          variables: {
-            id: articleId,
-            title: title,
-            content: markdownContent,
-          },
-        });
-      }, 5000);
+      updateUniqeArticleContent({
+        variables: {
+          id: articleId,
+          title: title,
+          content: markdownContent,
+        },
+      });
     }
     if (forItem === "markdownContent") {
       setMarkdownContent(e.target.value);
@@ -91,6 +84,11 @@ export default function Editor() {
       });
     }
   }
+  useEffect(() => {
+    setTitle(data?.articles[0].title);
+    setMarkdownContent(data?.articles[0].content);
+    setCoverImage(data?.articles[0].coverImage);
+  }, [data]);
 
   return (
     <Layout id="editor" title={`${title} | WriteOnce`}>
@@ -105,7 +103,7 @@ export default function Editor() {
               <HiOutlineArrowLeft />
             </IconButton>
           </div>
-          <div className="flex flex-col justify-center items-start ml-1 w-fit">
+          <form className="flex flex-col justify-center items-start ml-1 w-fit">
             <input
               onChange={(e) => {
                 saveContentChanges(e, "title");
@@ -118,7 +116,7 @@ export default function Editor() {
             <span className="text-black dark:text-white text-sm mt-1 text-opacity-60 dark:text-opacity-60">
               Last Updated &#x2022; 21-09-2022
             </span>
-          </div>
+          </form>
         </div>
         <button
           onClick={() => setShowCoverImageModal(true)}
@@ -137,7 +135,7 @@ export default function Editor() {
       </div>
       {/* Editor */}
       <ScrollSync>
-        <div className="relative inline-flex justify-center items-center w-full z-10 overflow-hidden">
+        <form className="relative inline-flex justify-center items-center w-full z-10 overflow-hidden">
           <div className="md:hidden inline-flex justify-center items-center rounded-lg absolute top-2 right-2 bg-[#E7E7E7] dark:bg-[#222222]">
             <IconButton
               center={true}
@@ -179,7 +177,7 @@ export default function Editor() {
           {showTOC && (
             <TOC markdownContent={markdownContent} setShowTOC={setShowTOC} />
           )}
-        </div>
+        </form>
       </ScrollSync>
       <PublishModal
         opened={showPublishModal}
