@@ -91,7 +91,7 @@ const MarkdownEditor = ({
       document.msExitFullscreen();
     }
   }
-
+  console.log("hello" + ref.current);
   return (
     <div
       className={`w-full ${mobileEditor} h-[90vh] py-4 px-1 relative bg-[#F7F7F7] dark:bg-[#161616]`}
@@ -294,15 +294,17 @@ const MarkdownEditor = ({
       </div>
       {/* Editor */}
       <ScrollSyncPane group="one">
-        <TextareaMarkdown
-          className="w-full h-full focus:outline-none resize-none bg-transparent text-black dark:text-white py-5 px-12 placeholder:italic"
-          ref={ref}
-          value={markdownContent}
-          placeholder="Begin your amazing story here..."
-          onChange={(e) => {
-            saveContentChanges(e, "markdownContent");
-          }}
-        />
+        <div className="w-full h-full">
+          <TextareaMarkdown
+            ref={ref}
+            className="w-full h-full focus:outline-none resize-none bg-transparent text-black dark:text-white py-5 px-12 placeholder:italic"
+            value={markdownContent}
+            placeholder="Begin your amazing story here..."
+            onChange={(e) => {
+              saveContentChanges(e, "markdownContent");
+            }}
+          />
+        </div>
       </ScrollSyncPane>
       {/* Extras */}
     </div>
