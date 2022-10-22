@@ -33,12 +33,13 @@ function Dashboard() {
   );
   const userArticles = data?.articles;
   const { isLoading, isAuthenticated } = useAuthenticationStatus();
+
   useEffect(() => {
     if (!isAuthenticated) {
       router.push("/");
       return null;
     }
-  }, []);
+  }, [isAuthenticated, router]);
 
   return (
     <Layout title={`${currentPage} | WriteOnce`}>
