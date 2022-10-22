@@ -33,6 +33,7 @@ import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { ScrollSync, ScrollSyncPane } from "react-scroll-sync";
+import SettingsModal from "../../components/Editor/SettingsModal";
 
 export default function Editor() {
   const [markdownContent, setMarkdownContent] = useState("");
@@ -44,6 +45,7 @@ export default function Editor() {
   const [title, setTitle] = useState("Untitled");
   const [coverImage, setCoverImage] = useState(null);
   const [coverImageData, setCoverImageData] = useState(null);
+  const [showSettingsModal, setShowSettingsModal] = useState(false);
 
   const [showCoverImageModal, setShowCoverImageModal] = useState(false);
   const [hashnode, setHashnode] = useState(false);
@@ -93,7 +95,7 @@ export default function Editor() {
   return (
     <Layout id="editor" title={`${title} | WriteOnce`}>
       {/* Header */}
-      <div className="w-full px-5 py-4 inline-flex justify-between items-center bg-white dark:bg-[#0F0F0F] transition-all duration-200 ease-in-out z-10">
+      <div className="w-full px-5 py-4 inline-flex justify-between items-center bg-white dark:bg-[#0F0F0F] transition-all duration-200 ease-in-out">
         <div className="inline-flex justify-center items-center">
           <div className="md:inline-flex hidden">
             <IconButton
@@ -162,6 +164,8 @@ export default function Editor() {
             setScrollSync={setScrollSync}
             previewer={showMarkdownPreview}
             guide={showMarkdownGuide}
+            showSettingsModal={showSettingsModal}
+            setShowSettingsModal={setShowSettingsModal}
           />
 
           {showMarkdownPreview && (
@@ -199,6 +203,14 @@ export default function Editor() {
         coverImageData={coverImageData}
         setCoverImageData={setCoverImageData}
         coverImageLink
+      />
+      <SettingsModal
+        opened={showSettingsModal}
+        onClose={() => setShowSettingsModal(false)}
+        showToolbar={showToolbar}
+        setShowToolbar={setShowToolbar}
+        scrollSync={scrollSync}
+        setScrollSync={setScrollSync}
       />
     </Layout>
   );

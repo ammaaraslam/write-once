@@ -43,11 +43,12 @@ const MarkdownEditor = ({
   setScrollSync,
   previewer,
   guide,
+  showSettingsModal,
+  setShowSettingsModal,
 }) => {
   const ref = useRef();
   const [showMenu, setShowMenu] = useState(false);
   const [showHeadingMenu, setShowHeadingMenu] = useState(false);
-  const [showSettingsModal, setShowSettingsModal] = useState(false);
   const menuPopup = showMenu ? "scale-100 opacity-100" : "scale-90 opacity-0";
   const headingPopup = showHeadingMenu ? "scale-100" : "scale-90";
   const toolbarDisplay = showToolbar
@@ -57,6 +58,12 @@ const MarkdownEditor = ({
   const showToolbarButtonDisplay = !showToolbar
     ? "scale-100 z-50 -bottom-2"
     : "scale-90 -z-50 -bottom-10";
+
+  const mobileEditor = previewer
+    ? "md:flex hidden"
+    : guide
+    ? "md:flex hidden"
+    : "";
 
   const [fullscreen, setFullscreen] = useState(false);
   function openFullscreen() {
@@ -87,9 +94,7 @@ const MarkdownEditor = ({
 
   return (
     <div
-      className={`w-full ${
-        previewer ? "md:flex hidden" : guide ? "md:flex hidden" : ""
-      } h-[90vh] py-4 px-1 relative bg-[#F7F7F7] dark:bg-[#161616]`}
+      className={`w-full  h-[90vh] py-4 px-1 relative bg-[#F7F7F7] dark:bg-[#161616]`}
     >
       {/* Toolbar */}
       <button
@@ -300,14 +305,6 @@ const MarkdownEditor = ({
         />
       </ScrollSyncPane>
       {/* Extras */}
-      <SettingsModal
-        opened={showSettingsModal}
-        onClose={() => setShowSettingsModal(false)}
-        showToolbar={showToolbar}
-        setShowToolbar={setShowToolbar}
-        scrollSync={scrollSync}
-        setScrollSync={setScrollSync}
-      />
     </div>
   );
 };

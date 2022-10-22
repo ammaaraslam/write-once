@@ -5,8 +5,8 @@ import useOutsideClick from "./useOutsideClick";
 const Modal = ({ opened, children, onClose, title }) => {
   const modalDisplay = opened
     ? "z-[60] scale-100 transition-all duration-200"
-    : "-z-50 scale-50 transition-all duration-200";
-  const modalBgDisplay = opened ? "z-50" : "-z-50";
+    : "-z-[100] scale-50 transition-all duration-200";
+  const modalBgDisplay = opened ? "z-50" : "-z-[100]";
 
   return (
     <>
