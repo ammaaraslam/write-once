@@ -73,7 +73,6 @@ const SettingsModal = ({ opened, onClose }) => {
       },
     });
   }
-
   return (
     <Modal opened={opened} onClose={onClose}>
       <div className="w-full h-full flex flex-col justify-start items-start py-2 px-8 font-inter text-[#1C1C1C] dark:text-[#EFEFEF]">
@@ -105,7 +104,7 @@ const SettingsModal = ({ opened, onClose }) => {
               <div className="ml-2 mt-2">
                 {data?.user_tokens?.length !== 0 && (
                   <IconButton
-                    handleOnClick={createTokens}
+                    handleOnClick={saveTokens}
                     colored={true}
                     sizeBig={true}
                     fullCenter={true}
@@ -115,7 +114,7 @@ const SettingsModal = ({ opened, onClose }) => {
                 )}
                 {data?.user_tokens?.length === 0 && (
                   <IconButton
-                    handleOnClick={saveTokens}
+                    handleOnClick={createTokens}
                     colored={true}
                     sizeBig={true}
                     fullCenter={true}
@@ -141,7 +140,7 @@ const SettingsModal = ({ opened, onClose }) => {
               <div className="ml-2 mt-2">
                 {data?.user_tokens?.length !== 0 && (
                   <IconButton
-                    handleOnClick={createTokens}
+                    handleOnClick={saveTokens}
                     colored={true}
                     sizeBig={true}
                     fullCenter={true}
@@ -151,7 +150,7 @@ const SettingsModal = ({ opened, onClose }) => {
                 )}
                 {data?.user_tokens?.length === 0 && (
                   <IconButton
-                    handleOnClick={saveTokens}
+                    handleOnClick={createTokens}
                     colored={true}
                     sizeBig={true}
                     fullCenter={true}
