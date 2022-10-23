@@ -94,78 +94,80 @@ const SettingsModal = ({ opened, onClose }) => {
         <h2 className="w-full font-semibold text-2xl text-black dark:text-white border-b-[1px] border-black dark:border-white border-opacity-20 dark:border-opacity-20">
           Account Settings
         </h2>
-        <div className="w-full flex flex-col justify-between items-start my-3">
-          <span>Hashnode Access Token:</span>
-          <div className="w-full inline-flex justify-center items-center">
-            <input
-              className="focus:outline-none rounded-lg py-2 px-3 text-sm border-[1px] border-black dark:border-white border-opacity-20 dark:border-opacity-20 focus:border-opacity-40 dark:focus:border-opacity-40 transition-colors duration-100 mt-2 w-full"
-              type="password"
-              value={hashnodeToken}
-              onChange={handleHashnodeInputOnChange}
-              required
-            />
-            {hashnodeTokenChanged && (
-              <div className="ml-2 mt-2">
-                {data?.user_tokens?.length !== 0 && (
-                  <IconButton
-                    handleOnClick={saveTokens}
-                    colored={true}
-                    sizeBig={true}
-                    fullCenter={true}
-                  >
-                    <AiOutlineSave />
-                  </IconButton>
-                )}
-                {data?.user_tokens?.length === 0 && (
-                  <IconButton
-                    handleOnClick={createTokens}
-                    colored={true}
-                    sizeBig={true}
-                    fullCenter={true}
-                  >
-                    <AiOutlineSave />
-                  </IconButton>
-                )}
-              </div>
-            )}
+        <form>
+          <div className="w-full flex flex-col justify-between items-start my-3">
+            <span>Hashnode Access Token:</span>
+            <div className="w-full inline-flex justify-center items-center">
+              <input
+                className="focus:outline-none rounded-lg py-2 px-3 text-sm border-[1px] border-black dark:border-white border-opacity-20 dark:border-opacity-20 focus:border-opacity-40 dark:focus:border-opacity-40 transition-colors duration-100 mt-2 w-full"
+                type="password"
+                value={hashnodeToken}
+                onChange={handleHashnodeInputOnChange}
+                required
+              />
+              {hashnodeTokenChanged && (
+                <div className="ml-2 mt-2">
+                  {data?.user_tokens?.length !== 0 && (
+                    <IconButton
+                      handleOnClick={saveTokens}
+                      colored={true}
+                      sizeBig={true}
+                      fullCenter={true}
+                    >
+                      <AiOutlineSave />
+                    </IconButton>
+                  )}
+                  {data?.user_tokens?.length === 0 && (
+                    <IconButton
+                      handleOnClick={createTokens}
+                      colored={true}
+                      sizeBig={true}
+                      fullCenter={true}
+                    >
+                      <AiOutlineSave />
+                    </IconButton>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-        <div className="w-full flex flex-col justify-between items-start my-3">
-          <span>Hashnode Publication Id:</span>
-          <div className="w-full inline-flex justify-center items-center">
-            <input
-              className="focus:outline-none rounded-lg py-2 px-3 text-sm border-[1px] border-black dark:border-white border-opacity-20 dark:border-opacity-20 focus:border-opacity-40 dark:focus:border-opacity-40 transition-colors duration-100 mt-2 w-full"
-              type="password"
-              value={hashnodePublicationId}
-              onChange={handleHashnodePublicationInputOnChange}
-              required
-            />
-            {hashnodePublicationIdChanged && (
-              <div className="ml-2 mt-2">
-                {data?.user_tokens?.length !== 0 && (
-                  <IconButton
-                    handleOnClick={saveTokens}
-                    colored={true}
-                    sizeBig={true}
-                    fullCenter={true}
-                  >
-                    <AiOutlineSave />
-                  </IconButton>
-                )}
-                {data?.user_tokens?.length === 0 && (
-                  <IconButton
-                    handleOnClick={createTokens}
-                    colored={true}
-                    sizeBig={true}
-                    fullCenter={true}
-                  >
-                    <AiOutlineSave />
-                  </IconButton>
-                )}
-              </div>
-            )}
+          <div className="w-full flex flex-col justify-between items-start my-3">
+            <span>Hashnode Publication Id:</span>
+            <div className="w-full inline-flex justify-center items-center">
+              <input
+                className="focus:outline-none rounded-lg py-2 px-3 text-sm border-[1px] border-black dark:border-white border-opacity-20 dark:border-opacity-20 focus:border-opacity-40 dark:focus:border-opacity-40 transition-colors duration-100 mt-2 w-full"
+                type="password"
+                value={hashnodePublicationId}
+                onChange={handleHashnodePublicationInputOnChange}
+                required
+              />
+              {hashnodePublicationIdChanged && (
+                <div className="ml-2 mt-2">
+                  {data?.user_tokens?.length !== 0 && (
+                    <IconButton
+                      handleOnClick={saveTokens}
+                      colored={true}
+                      sizeBig={true}
+                      fullCenter={true}
+                    >
+                      <AiOutlineSave />
+                    </IconButton>
+                  )}
+                  {data?.user_tokens?.length === 0 && (
+                    <IconButton
+                      handleOnClick={createTokens}
+                      colored={true}
+                      sizeBig={true}
+                      fullCenter={true}
+                    >
+                      <AiOutlineSave />
+                    </IconButton>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        </form>
 
         {/* <div className="w-full flex flex-col justify-between items-start my-3">
           <span>Dev.to Access Token:</span>

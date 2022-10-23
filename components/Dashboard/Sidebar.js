@@ -25,6 +25,7 @@ const Sidebar = ({ showSettingsModal, setShowSettingsModal }) => {
         article: {
           title: "Untitled",
           content: "",
+          coverImage: "",
         },
       },
     });

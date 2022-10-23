@@ -32,9 +32,11 @@ function Dashboard() {
       ? GET_ALL_PUBLISHED_ARTICLES
       : GET_ALL_ARTICLES
   );
-  const [userArticles, setUserArticles] = useState(data?.articles);
+  const [userArticles, setUserArticles] = useState([]);
   const { isLoading, isAuthenticated } = useAuthenticationStatus();
-
+  useEffect(() => {
+    setUserArticles(data?.articles);
+  }, [data]);
   useEffect(() => {
     if (!isAuthenticated) {
       router.push("/");

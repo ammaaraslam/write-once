@@ -10,7 +10,9 @@ import { PrimaryOutlineButton } from "./Buttons";
 import { BsGoogle, BsGithub } from "react-icons/bs";
 
 const SignUpModal = ({ opened, onClose }) => {
-  const { google, github } = useProviderLink();
+  const { google, github } = useProviderLink({
+    options: { allowedRoles: ["user"] },
+  });
 
   return (
     <Modal opened={opened} onClose={onClose}>
