@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   IconButton,
   OutlinedButton,
@@ -16,6 +16,7 @@ import { useMutation } from "@apollo/client";
 import { UPDATE_UNIQUE_ARTICLE_COVER_IMAGE } from "../../utils/queries/articles";
 import { useRouter } from "next/router";
 import { IoCloseSharp } from "react-icons/io5";
+import { CgSpinner } from "react-icons/cg";
 const CoverImageModal = ({
   coverImage,
   setCoverImage,
@@ -25,6 +26,7 @@ const CoverImageModal = ({
   onClose,
   coverImageLink,
 }) => {
+  const [uploading, setUploading] = useState(false);
   const handleCoverImageChange = (changeEvent) => {
     const reader = new FileReader();
     setCoverImage(changeEvent.target.files[0]);
@@ -40,6 +42,7 @@ const CoverImageModal = ({
   );
   const articleId = useRouter().query.id;
   async function coverImageUpload() {
+    setUploading(true);
     const uploadedImage = await upload({
       file: coverImage,
       bucketId: "coverImages",
@@ -53,6 +56,7 @@ const CoverImageModal = ({
     });
     if (uploadedImage.isUploaded) {
       setCoverImage(publicUrl);
+      setUploading(false);
       onClose();
     }
   }
@@ -146,7 +150,7 @@ const CoverImageModal = ({
               inverse={true}
               handleOnClick={coverImageUpload}
             >
-              Upload
+              Upload {uploading && <CgSpinner className="ml-2 animate-spin" />}
             </SecondaryOutlinedButton>
           </div>
         )}

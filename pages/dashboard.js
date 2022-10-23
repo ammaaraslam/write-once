@@ -14,6 +14,7 @@ import { useQuery } from "@apollo/client";
 import SettingsModal from "../components/Dashboard/SettingsModal";
 import { useEffect, useState } from "react";
 import { useAuthenticationStatus } from "@nhost/react";
+import { CgSpinner } from "react-icons/cg";
 
 function Dashboard() {
   const [showSettingsModal, setShowSettingsModal] = useState(false);
@@ -31,7 +32,7 @@ function Dashboard() {
       ? GET_ALL_PUBLISHED_ARTICLES
       : GET_ALL_ARTICLES
   );
-  const userArticles = data?.articles;
+  const [userArticles, setUserArticles] = useState(data?.articles);
   const { isLoading, isAuthenticated } = useAuthenticationStatus();
 
   useEffect(() => {
@@ -55,7 +56,11 @@ function Dashboard() {
           </h1>
         </div>
         <div className="w-full h-full flex flex-col justify-center items-center md:px-12 md:py-10 px-5 py-9">
-          {userArticles?.length > 0 ? (
+          {loading ? (
+            <div className="mt-5 w-full inline-flex justify-center items-center">
+              <CgSpinner className="text-3xl animate-spin" />
+            </div>
+          ) : userArticles?.length > 0 ? (
             <>
               {userArticles?.map((article) => (
                 <ArticleCard
@@ -64,11 +69,14 @@ function Dashboard() {
                   content={article.content}
                   isDraft={article.isDraft}
                   id={article.id}
+                  isPublished={article.isPublished}
+                  userArticles={userArticles}
+                  setUserArticles={setUserArticles}
                 />
               ))}
             </>
           ) : (
-            <p className="font-inter font-semibold md:text-2xl text-lg text-center tracking-wide">
+            <p className="mt-5 font-inter font-semibold md:text-2xl text-lg text-center tracking-wide">
               You Currently Have No Articles
             </p>
           )}

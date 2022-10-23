@@ -1,12 +1,12 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useUserId } from "@nhost/react";
-import React from "react";
+import React, { useState } from "react";
 import publishToHashnode from "../../services/publish/publishToHashnode";
 import { PrimaryButton, SecondaryOutlinedButton, Toggle } from "../Buttons";
 import Modal from "../Modal";
 import { GET_TOKENS_WITH_USERID } from "../../utils/queries/user";
 import { UPDATE_ARTICLE_PUBLISHED_STATUS } from "../../utils/queries/articles";
-
+import { CgSpinner } from "react-icons/cg";
 const PublishModal = ({
   hashnode,
   dev,
@@ -27,10 +27,13 @@ const PublishModal = ({
     variables: { userId: userId },
   });
 
+  const [publishing, setPublishing] = useState(false);
+
   const [updatePublishedStatus] = useMutation(UPDATE_ARTICLE_PUBLISHED_STATUS);
   console.log(data);
   async function publishArticle() {
     if (hashnode) {
+      setPublishing(true);
       await publishToHashnode({
         userAccessToken: data?.user_tokens[0]?.hashnodeToken,
         publicationId: data?.user_tokens[0]?.hashnodePublicationId,
@@ -39,6 +42,10 @@ const PublishModal = ({
         coverImage: coverImage,
       });
       await updatePublishedStatus({ variables: { id: articleId } });
+      setTimeout(() => {
+        setPublishing(false);
+        onClose();
+      }, 1000);
     }
   }
   return (
@@ -74,7 +81,7 @@ const PublishModal = ({
             respective platforms.
           </span> */}
           <SecondaryOutlinedButton handleOnClick={publishArticle}>
-            Publish
+            Publish {publishing && <CgSpinner className="ml-2 animate-spin" />}
           </SecondaryOutlinedButton>
         </div>
       </div>

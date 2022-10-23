@@ -62,7 +62,7 @@ export const GET_ALL_DRAFTS = gql`
 
 export const GET_ALL_PUBLISHED_ARTICLES = gql`
   query GetAllPublishedArticles {
-    articles(where: { isPublished: { _eq: true } }) {
+    articles(where: { isPublished: { _eq: true }, isDraft: { _eq: false } }) {
       id
       content
       coverImage
@@ -82,7 +82,7 @@ export const UPDATE_ARTICLE_PUBLISHED_STATUS = gql`
   mutation MyMutation($id: uuid!) {
     update_articles_by_pk(
       pk_columns: { id: $id }
-      _set: { isPublished: true }
+      _set: { isPublished: true, isDraft: false }
     ) {
       id
     }

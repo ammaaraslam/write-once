@@ -62,6 +62,8 @@ const SettingsModal = ({ opened, onClose }) => {
         hashnodePublication: hashnodePublicationId,
       },
     });
+    setHashnodePublicationIdChanged(false);
+    setHashnodeTokenChanged(false);
   }
   async function saveTokens() {
     const res = await updateTokens({
@@ -72,6 +74,8 @@ const SettingsModal = ({ opened, onClose }) => {
         hashnodePublication: hashnodePublicationId,
       },
     });
+    setHashnodePublicationIdChanged(false);
+    setHashnodeTokenChanged(false);
   }
   return (
     <Modal opened={opened} onClose={onClose}>
