@@ -9,14 +9,14 @@ async function publishToHashnode({
 }) {
   let requestBody = {
     query: `mutation CreatePublicationStory {
-            createPublicationStory(publicationId: "${publicationId}", input: { title: "${title}", contentMarkdown: "${content}", coverImageURL: "${coverImage}", tags: [] }) {
+            createPublicationStory(publicationId: "${publicationId}", input: { title: "${title}", contentMarkdown: """${content}""", coverImageURL: "${coverImage}" tags: [] }) {
                 code,
                 success,
                 message
             }
         }`,
   };
-  console.log(publicationId);
+  console.log(userAccessToken, publicationId, title, content);
   let response = await fetch("https://api.hashnode.com", {
     method: "POST",
     body: JSON.stringify(requestBody),

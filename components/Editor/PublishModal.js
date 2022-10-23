@@ -28,7 +28,7 @@ const PublishModal = ({
   });
 
   const [updatePublishedStatus] = useMutation(UPDATE_ARTICLE_PUBLISHED_STATUS);
-
+  console.log(data);
   async function publishArticle() {
     if (hashnode) {
       await publishToHashnode({
